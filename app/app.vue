@@ -1,5 +1,7 @@
 <template>
   <UApp>
-    Henlo
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </UApp>
 </template>
