@@ -1,9 +1,20 @@
+<script setup lang="ts">
+const items = computed(() => {
+  return playableRegions.map(region => ({
+    label: region.title,
+    to: `/play/${region.slug}`,
+  }))
+})
+</script>
+
 <template>
-  <UHeader :toggle="false">
+  <UHeader toggle-side="right">
     <template #title>
       <UIcon name="i-tabler-globe-filled" class="size-8 text-primary" />
       <span>Guess the Flag</span>
     </template>
+
+    <UNavigationMenu :items />
 
     <template #right>
       <UColorModeButton />
@@ -16,6 +27,10 @@
         target="_blank"
         aria-label="GitHub"
       />
+    </template>
+
+    <template #body>
+      <UNavigationMenu orientation="vertical" :items />
     </template>
   </UHeader>
 </template>
