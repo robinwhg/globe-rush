@@ -16,25 +16,18 @@ const emit = defineEmits<{
     </div>
 
     <div class="mx-auto grid max-w-2xl grid-cols-2 items-stretch gap-4">
-      <UCard
-        :ui="{ root: 'h-full min-h-24 cursor-pointer flex p-2 sm:p-2', body: 'flex-1 flex items-center justify-center gap-2' }"
+      <BaseCardButton
+        icon="i-tabler-player-stop-filled"
+        label="Stop"
         @click="emit('exit')"
-      >
-        <UIcon name="i-tabler-player-stop-filled" class="size-6" />
-        <p class="text-base font-semibold sm:text-xl">
-          Stop
-        </p>
-      </UCard>
+      />
 
-      <UCard
-        :ui="{ root: 'bg-primary h-full min-h-24 cursor-pointer flex p-2 sm:p-2', body: 'flex-1 flex items-center justify-center gap-2 text-inverted' }"
+      <BaseCardButton
+        color="primary"
+        icon="i-tabler-player-play-filled"
+        label="Resume"
         @click="emit('resume')"
-      >
-        <UIcon name="i-tabler-player-play-filled" class="size-6" />
-        <p class="text-base font-semibold sm:text-xl">
-          Resume
-        </p>
-      </UCard>
+      />
     </div>
   </div>
 </template>

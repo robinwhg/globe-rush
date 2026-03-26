@@ -120,15 +120,11 @@ function handleExit(): void {
         >
 
         <div class="mx-auto grid max-w-2xl grid-cols-2 items-stretch gap-4">
-          <UCard
+          <BaseCardButton
             v-for="choice in choices"
             :key="choice.cca2"
-            :ui="{ root: 'h-full min-h-24 cursor-pointer flex p-1 sm:p-1', body: 'flex-1 flex items-center justify-center' }"
-          >
-            <p class="line-clamp-3 text-center text-base font-semibold sm:text-xl">
-              {{ choice.name.common }}
-            </p>
-          </UCard>
+            :label="choice.name.common"
+          />
         </div>
       </div>
 
