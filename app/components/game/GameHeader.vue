@@ -1,12 +1,30 @@
 <script setup lang="ts">
+interface GameHeaderProps {
+  currentQuestionNumber: number
+  totalQuestions: number
+  elapsedSeconds: number
+}
+
+const props = defineProps<GameHeaderProps>()
+
 const isPaused = defineModel<boolean>('paused', {
   default: false,
 })
 
-const question = 6
-const total = 25
-const timerLabel = '01:42'
-const progress = (question / total) * 100
+const progress = computed(() => {
+  if (props.totalQuestions === 0) {
+    return 0
+  }
+
+  return Math.round((props.currentQuestionNumber / props.totalQuestions) * 100)
+})
+
+const timerLabel = computed(() => {
+  const minutes = Math.floor(props.elapsedSeconds / 60).toString().padStart(2, '0')
+  const seconds = (props.elapsedSeconds % 60).toString().padStart(2, '0')
+
+  return `${minutes}:${seconds}`
+})
 </script>
 
 <template>
@@ -37,7 +55,7 @@ const progress = (question / total) * 100
         <UProgress :model-value="progress" />
         <div class="inline-flex items-center justify-between text-sm">
           <span class="font-semibold">
-            Flag {{ question }} of {{ total }}
+            Flag {{ props.currentQuestionNumber }} of {{ props.totalQuestions }}
           </span>
           <span class="text-muted">
             {{ progress }} %

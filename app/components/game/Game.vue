@@ -12,12 +12,26 @@ const emit = defineEmits<{
 const isPaused = ref(false)
 const selectedChoiceCode = ref<string | null>(null)
 const isRevealed = ref(false)
+const elapsedSeconds = ref(0)
 
 const CHOICE_COUNT = 4
 const ADVANCE_DELAY_MS = 600
 
 const currentIndex = ref(0)
 let advanceTimeout: ReturnType<typeof setTimeout> | null = null
+let timerInterval: ReturnType<typeof setInterval> | null = null
+
+const totalQuestions = computed(() => {
+  return props.questions.length
+})
+
+const currentQuestionNumber = computed(() => {
+  if (totalQuestions.value === 0) {
+    return 0
+  }
+
+  return Math.min(currentIndex.value + 1, totalQuestions.value)
+})
 
 const currentQuestion = computed(() => {
   return props.questions[currentIndex.value] ?? null
@@ -46,6 +60,25 @@ const choices = computed(() => {
 
   return shuffle([correct, ...distractors]).slice(0, CHOICE_COUNT)
 })
+
+function clearTimerInterval(): void {
+  if (!timerInterval) {
+    return
+  }
+
+  clearInterval(timerInterval)
+  timerInterval = null
+}
+
+function startTimerInterval(): void {
+  if (timerInterval || isPaused.value || !currentQuestion.value) {
+    return
+  }
+
+  timerInterval = setInterval(() => {
+    elapsedSeconds.value += 1
+  }, 1000)
+}
 
 function clearAdvanceTimeout(): void {
   if (!advanceTimeout) {
@@ -99,13 +132,24 @@ function handleResume(): void {
 
 function handleExit(): void {
   clearAdvanceTimeout()
+  clearTimerInterval()
   resetChoiceState()
   isPaused.value = false
   emit('back')
 }
 
+watch([isPaused, currentQuestion], ([paused, question]) => {
+  if (paused || !question) {
+    clearTimerInterval()
+    return
+  }
+
+  startTimerInterval()
+}, { immediate: true })
+
 onBeforeUnmount(() => {
   clearAdvanceTimeout()
+  clearTimerInterval()
 })
 
 // FIXME: Alt text shown when img not loaded
@@ -118,7 +162,12 @@ onBeforeUnmount(() => {
 
 <template>
   <section class="space-y-12">
-    <GameHeader v-model:paused="isPaused" />
+    <GameHeader
+      v-model:paused="isPaused"
+      :current-question-number="currentQuestionNumber"
+      :total-questions="totalQuestions"
+      :elapsed-seconds="elapsedSeconds"
+    />
 
     <Transition name="fade" mode="out-in">
       <GamePause
