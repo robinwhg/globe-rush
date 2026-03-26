@@ -6,30 +6,35 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="absolute inset-0 z-20 flex items-center justify-center bg-default/80 p-4 backdrop-blur-sm">
-    <UPageCard
-      title="Paused"
-      description="Take a breath. Your run is waiting."
-      icon="i-tabler-player-pause"
-      class="w-full max-w-md"
-    >
-      <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:justify-end">
-        <UButton
-          label="Resume"
-          icon="i-tabler-player-play"
-          color="primary"
-          variant="solid"
-          @click="emit('resume')"
-        />
+  <div class="space-y-12">
+    <div class="h-56 lg:h-72 flex items-center justify-center">
+      <UCard
+        :ui="{ root: 'mx-auto h-full aspect-3/2 flex', body: 'flex-1 flex flex-col items-center justify-center text-dimmed' }"
+      >
+        <UIcon name="i-tabler-player-pause-filled" class="size-20 lg:size-32" />
+      </UCard>
+    </div>
 
-        <UButton
-          label="Exit to setup"
-          icon="i-tabler-arrow-left"
-          color="neutral"
-          variant="outline"
-          @click="emit('exit')"
-        />
-      </div>
-    </UPageCard>
+    <div class="mx-auto grid max-w-2xl grid-cols-2 items-stretch gap-4">
+      <UCard
+        :ui="{ root: 'h-full min-h-24 cursor-pointer flex p-2 sm:p-2', body: 'flex-1 flex items-center justify-center gap-2' }"
+        @click="emit('exit')"
+      >
+        <UIcon name="i-tabler-player-stop-filled" class="size-6" />
+        <p class="text-base font-semibold sm:text-xl">
+          Stop
+        </p>
+      </UCard>
+
+      <UCard
+        :ui="{ root: 'bg-primary h-full min-h-24 cursor-pointer flex p-2 sm:p-2', body: 'flex-1 flex items-center justify-center gap-2 text-inverted' }"
+        @click="emit('resume')"
+      >
+        <UIcon name="i-tabler-player-play-filled" class="size-6" />
+        <p class="text-base font-semibold sm:text-xl">
+          Resume
+        </p>
+      </UCard>
+    </div>
   </div>
 </template>

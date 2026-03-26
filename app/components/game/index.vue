@@ -86,10 +86,6 @@ defineExpose({
   choices,
 })
 
-function handlePause(): void {
-  isPaused.value = true
-}
-
 function handleResume(): void {
   isPaused.value = false
 }
@@ -102,11 +98,19 @@ function handleExit(): void {
 
 <template>
   <section class="space-y-12">
-    <GameHeader @pause="handlePause" />
+    <GameHeader v-model:paused="isPaused" />
 
-    <div class="relative">
+    <Transition name="fade" mode="out-in">
+      <GamePause
+        v-if="isPaused"
+        key="paused"
+        @resume="handleResume"
+        @exit="handleExit"
+      />
+
       <div
-        v-if="currentQuestion"
+        v-else-if="currentQuestion"
+        key="playing"
         class="space-y-12"
       >
         <img
@@ -119,8 +123,7 @@ function handleExit(): void {
           <UCard
             v-for="choice in choices"
             :key="choice.cca2"
-            variant="soft"
-            :ui="{ root: 'h-full min-h-24 cursor-pointer flex p-2 sm:p-2', body: 'flex-1 flex items-center justify-center' }"
+            :ui="{ root: 'h-full min-h-24 cursor-pointer flex p-1 sm:p-1', body: 'flex-1 flex items-center justify-center' }"
           >
             <p class="line-clamp-3 text-center text-base font-semibold sm:text-xl">
               {{ choice.name.common }}
@@ -131,16 +134,11 @@ function handleExit(): void {
 
       <div
         v-else
+        key="empty"
         class="py-6 text-center text-sm text-muted"
       >
         No questions available for this game.
       </div>
-
-      <GamePause
-        v-if="isPaused"
-        @resume="handleResume"
-        @exit="handleExit"
-      />
-    </div>
+    </Transition>
   </section>
 </template>

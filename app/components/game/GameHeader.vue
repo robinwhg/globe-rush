@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const emit = defineEmits<{
-  pause: []
-}>()
+const isPaused = defineModel<boolean>('paused', {
+  default: false,
+})
 
 const question = 6
 const total = 25
@@ -22,7 +22,14 @@ const progress = (question / total) * 100
       <span class="text-xl font-semibold">
         {{ timerLabel }}
       </span>
-      <UButton icon="i-tabler-player-pause" aria-label="pause" color="neutral" variant="ghost" size="xl" @click="emit('pause')" />
+      <UButton
+        :icon="isPaused ? 'i-tabler-player-play-filled' : 'i-tabler-player-pause-filled'"
+        :aria-label="isPaused ? 'resume' : 'pause'"
+        color="neutral"
+        variant="ghost"
+        size="xl"
+        @click="isPaused = !isPaused"
+      />
     </div>
 
     <div class="order-3 lg:order-2 col-span-2 lg:col-span-3">

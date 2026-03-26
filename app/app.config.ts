@@ -4,6 +4,11 @@ export default defineAppConfig({
       primary: 'blue',
       neutral: 'gray',
     },
+    card: {
+      defaultVariants: {
+        variant: 'soft',
+      },
+    },
     pageCard: {
       defaultVariants: {
         variant: 'soft',
