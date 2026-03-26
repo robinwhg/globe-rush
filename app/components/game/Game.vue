@@ -110,6 +110,10 @@ onBeforeUnmount(() => {
 
 // FIXME: Alt text shown when img not loaded
 // FIXME: Hint for territories that have the same flag as country
+// FIXME: Alt text of images shouldn't have the name of the country in it
+// FIXME: Cards need to have a slight off-white background in light mode
+// TODO: Preload the next image
+// TODO: Add skeleton loading state for image
 </script>
 
 <template>
