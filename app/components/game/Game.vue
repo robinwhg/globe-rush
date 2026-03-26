@@ -142,6 +142,7 @@ onBeforeUnmount(() => {
                 v-for="choice in choices"
                 :key="choice.cca2"
                 class="relative"
+                :class="{ 'choice-wiggle': showErrorOverlay(choice) }"
               >
                 <BaseCardButton
                   :label="choice.name.common"
@@ -180,3 +181,30 @@ onBeforeUnmount(() => {
     </Transition>
   </section>
 </template>
+
+<style scoped>
+@keyframes choice-wiggle {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-6px);
+  }
+  40%,
+  80% {
+    transform: translateX(6px);
+  }
+}
+
+.choice-wiggle {
+  animation: choice-wiggle 360ms ease-in-out 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .choice-wiggle {
+    animation: none;
+  }
+}
+</style>
