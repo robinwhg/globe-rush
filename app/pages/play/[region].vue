@@ -21,16 +21,6 @@ updateAppConfig({
   },
 })
 
-const regionTitle = computed(() => {
-  if (currentRegion.slug === 'world')
-    return 'the World'
-
-  if (currentRegion.slug === 'americas')
-    return 'the Americas'
-
-  return currentRegion.title
-})
-
 const regionCountries = computed(() => {
   if (currentRegion.slug === 'world') {
     return countries
@@ -38,46 +28,6 @@ const regionCountries = computed(() => {
 
   return countries.filter(country => country.region.toLowerCase() === currentRegion.slug)
 })
-
-const countryCount = computed(() => {
-  return regionCountries.value.filter(country => country.independent).length
-})
-
-const territoryCount = computed(() => {
-  return regionCountries.value.filter(country => !country.independent).length
-})
-
-const totalPopulation = computed(() => {
-  return regionCountries.value.reduce((sum, country) => sum + country.population, 0)
-})
-
-const integerFormatter = new Intl.NumberFormat('en-US')
-const compactFormatter = new Intl.NumberFormat('en-US', {
-  notation: 'compact',
-  maximumFractionDigits: 1,
-})
-
-const infoCards = computed(() => {
-  return [
-    {
-      title: 'Countries',
-      value: integerFormatter.format(countryCount.value),
-      icon: 'i-tabler-flag',
-    },
-    {
-      title: 'Territories',
-      value: integerFormatter.format(territoryCount.value),
-      icon: 'i-tabler-flag-3',
-    },
-    {
-      title: 'Population',
-      value: compactFormatter.format(totalPopulation.value),
-      icon: 'i-tabler-users',
-    },
-  ]
-})
-
-// TODO: Clicking on the info card will open a modal on desktop and a drawer on mobile that shows a list with the info split out into the countries
 
 type Scope = 'countries' | 'territories' | 'both'
 const scopeOptions: Array<{ value: Scope, label: string, description: string }> = [
@@ -134,21 +84,10 @@ const contextCountries = computed(() => {
           key="setup"
           class="space-y-8"
         >
-          <UPageHeader
-            headline="Let's guess"
-            :title="`Flags of ${regionTitle}`"
-            :description="`Tune your challenge, press Start, and race through the flags of ${regionTitle}.`"
-          >
-            <UPageGrid class="mt-10">
-              <UPageCard
-                v-for="card in infoCards"
-                :key="card.title"
-                :icon="card.icon"
-                :title="card.value"
-                :description="card.title"
-              />
-            </UPageGrid>
-          </UPageHeader>
+          <PlayHeader
+            :region="currentRegion.slug"
+            :countries="regionCountries"
+          />
 
           <URadioGroup
             v-model="scopeQuery"
