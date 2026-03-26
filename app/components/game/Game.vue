@@ -37,6 +37,12 @@ const currentQuestion = computed(() => {
   return props.questions[currentIndex.value] ?? null
 })
 
+const nextQuestion = computed(() => {
+  return props.questions[currentIndex.value + 1] ?? null
+})
+
+const isImageLoaded = ref(false)
+
 function shuffle<T>(items: T[]): T[] {
   const shuffled = [...items]
 
@@ -78,6 +84,11 @@ function startTimerInterval(): void {
   timerInterval = setInterval(() => {
     elapsedSeconds.value += 1
   }, 1000)
+}
+
+function preloadImage(src: string): void {
+  const image = new Image()
+  image.src = src
 }
 
 function clearAdvanceTimeout(): void {
@@ -126,6 +137,10 @@ function handleChoiceSelect(choice: Country): void {
   }, ADVANCE_DELAY_MS)
 }
 
+function handleCurrentImageLoad(): void {
+  isImageLoaded.value = true
+}
+
 function handleResume(): void {
   isPaused.value = false
 }
@@ -147,6 +162,18 @@ watch([isPaused, currentQuestion], ([paused, question]) => {
   startTimerInterval()
 }, { immediate: true })
 
+watch(currentQuestion, (question) => {
+  isImageLoaded.value = !question
+}, { immediate: true })
+
+watch(nextQuestion, (question) => {
+  if (!question) {
+    return
+  }
+
+  preloadImage(question.flag.svg)
+}, { immediate: true })
+
 onBeforeUnmount(() => {
   clearAdvanceTimeout()
   clearTimerInterval()
@@ -156,8 +183,6 @@ onBeforeUnmount(() => {
 // FIXME: Hint for territories that have the same flag as country
 // FIXME: Alt text of images shouldn't have the name of the country in it
 // FIXME: Cards need to have a slight off-white background in light mode
-// TODO: Preload the next image
-// TODO: Add skeleton loading state for image
 </script>
 
 <template>
@@ -184,11 +209,20 @@ onBeforeUnmount(() => {
       >
         <Transition name="fade" mode="out-in" appear>
           <div :key="currentQuestion.cca2" class="space-y-12">
-            <img
-              :src="currentQuestion.flag.svg"
-              :alt="currentQuestion.flag.alt"
-              class="mx-auto h-56 w-full object-contain lg:h-72"
-            >
+            <div class="relative h-56 lg:h-72">
+              <USkeleton
+                v-if="!isImageLoaded"
+                class="absolute inset-0 h-full w-full"
+              />
+
+              <img
+                :src="currentQuestion.flag.svg"
+                :alt="currentQuestion.flag.alt"
+                class="mx-auto h-full w-full object-contain transition-opacity duration-200"
+                :class="isImageLoaded ? 'opacity-100' : 'opacity-0'"
+                @load="handleCurrentImageLoad"
+              >
+            </div>
 
             <div class="mx-auto grid max-w-2xl grid-cols-2 items-stretch gap-4">
               <div
