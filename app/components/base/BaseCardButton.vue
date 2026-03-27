@@ -36,8 +36,8 @@ function handleClick(event: MouseEvent): void {
   >
     <UCard
       :ui="props.color === 'primary'
-        ? { root: 'h-24 cursor-pointer flex p-1 sm:p-1 bg-primary', body: 'flex-1 flex items-center justify-center gap-2 text-inverted' }
-        : { root: 'h-24 cursor-pointer flex p-1 sm:p-1', body: 'flex-1 flex items-center justify-center gap-2' }"
+        ? { root: 'h-24 cursor-pointer flex p-1 sm:p-1 bg-primary hover:bg-primary/75', body: 'flex-1 flex items-center justify-center gap-2 text-inverted' }
+        : { root: 'h-24 cursor-pointer flex p-1 sm:p-1 hover:bg-elevated', body: 'flex-1 flex items-center justify-center gap-2' }"
     >
       <template v-if="icon || label">
         <UIcon v-if="icon" :name="icon" class="size-6 shrink-0" />
