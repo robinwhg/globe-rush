@@ -158,7 +158,7 @@ onBeforeUnmount(() => {
 
 // FIXME: Hint for territories that have the same flag as country
 // FIXME: Alt text of images shouldn't have the name of the country in it
-// TODO: Stop timer at 60m
+// TODO: Stop timer at 60m & after 5m of inactivity pause
 </script>
 
 <template>
