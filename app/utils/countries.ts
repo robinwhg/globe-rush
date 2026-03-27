@@ -18,6 +18,7 @@ export interface Country {
   }
   sovereignState: string
   cca2: string
+  cca3: string
   independent: boolean
   altSpellings: string[]
   region: string
