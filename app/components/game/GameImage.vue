@@ -32,10 +32,12 @@ watch(() => props.preloadSrc, (src) => {
 </script>
 
 <template>
-  <div class="relative h-64 lg:h-80 flex p-4">
+  <UCard
+    variant="soft" :ui="{ root: 'dark:bg-default', body: 'p-4 sm:p-4 relative h-64 lg:h-80' }"
+  >
     <USkeleton
       v-if="!isImageLoaded"
-      class="absolute inset-0 h-full w-full"
+      class="absolute inset-0 h-full aspect-3/2"
     />
 
     <img
@@ -45,5 +47,5 @@ watch(() => props.preloadSrc, (src) => {
       :class="isImageLoaded ? 'opacity-100' : 'opacity-0'"
       @load="handleImageLoad"
     >
-  </div>
+  </UCard>
 </template>

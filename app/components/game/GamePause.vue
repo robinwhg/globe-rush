@@ -7,14 +7,11 @@ const emit = defineEmits<{
 
 <template>
   <div class="grid grid-cols-2 items-stretch gap-4 max-w-2xl mx-auto">
-    <div class="col-span-2 h-64 lg:h-80 flex p-4">
-      <UCard
-        variant="soft"
-        :ui="{ root: 'mx-auto h-full aspect-3/2 flex', body: 'flex-1 flex flex-col items-center justify-center text-dimmed' }"
-      >
-        <UIcon name="i-tabler-player-pause-filled" class="size-20 lg:size-32" />
-      </UCard>
-    </div>
+    <UCard
+      variant="soft" :ui="{ root: 'col-span-2 dark:bg-default', body: 'p-4 sm:p-4 relative h-64 lg:h-80 flex items-center justify-center' }"
+    >
+      <UIcon name="i-tabler-player-pause-filled" class="size-20 lg:size-32 text-dimmed" />
+    </UCard>
 
     <BaseCardButton
       icon="i-tabler-player-stop-filled"

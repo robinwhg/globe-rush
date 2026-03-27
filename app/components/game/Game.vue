@@ -156,10 +156,8 @@ onBeforeUnmount(() => {
   clearTimerInterval()
 })
 
-// FIXME: Alt text shown when img not loaded
 // FIXME: Hint for territories that have the same flag as country
 // FIXME: Alt text of images shouldn't have the name of the country in it
-// FIXME: Cards need to have a slight off-white background in light mode
 // TODO: Stop timer at 60m
 </script>
 
