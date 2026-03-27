@@ -4,6 +4,7 @@ interface GameHeaderState {
   answeredQuestions: number
   totalQuestions: number
   elapsedSeconds: number
+  isErrorFeedbackActive: boolean
 }
 
 interface GameHeaderProps {
@@ -59,6 +60,8 @@ const timerLabel = computed(() => {
       <div class="flex flex-col gap-2 lg:max-w-2xl mx-auto">
         <UProgress
           :model-value="progress"
+          :color="props.state.isErrorFeedbackActive ? 'error' : 'primary'"
+          :ui="{ indicator: props.state.isErrorFeedbackActive ? 'animate-pulse' : '' }"
         />
         <div class="inline-flex items-center justify-between text-sm">
           <span class="font-semibold">

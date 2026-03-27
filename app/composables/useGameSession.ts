@@ -89,6 +89,14 @@ export function useGameSession(config: UseGameSessionConfig) {
     }
   })
 
+  const isErrorFeedbackActive = computed(() => {
+    if (!isRevealed.value || !selectedChoiceCode.value || !currentQuestion.value) {
+      return false
+    }
+
+    return selectedChoiceCode.value !== currentQuestion.value.cca2
+  })
+
   const viewState = computed<'paused' | 'completed' | 'playing'>(() => {
     if (runResult.value) {
       return 'completed'
@@ -237,6 +245,7 @@ export function useGameSession(config: UseGameSessionConfig) {
     choices,
     isCompleted,
     viewState,
+    isErrorFeedbackActive,
     runResult,
     showSuccessOverlay,
     showErrorOverlay,

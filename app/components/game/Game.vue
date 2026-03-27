@@ -48,6 +48,7 @@ watch(
         answeredQuestions: gameSession.displayAnsweredQuestions,
         totalQuestions: gameSession.totalQuestions,
         elapsedSeconds: gameSession.elapsedSeconds,
+        isErrorFeedbackActive: gameSession.isErrorFeedbackActive,
       }"
     />
 
