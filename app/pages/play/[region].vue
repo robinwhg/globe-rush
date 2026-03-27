@@ -13,6 +13,31 @@ if (!currentRegion) {
   })
 }
 
+const regionTitle = computed(() => {
+  if (currentRegion.slug === 'world') {
+    return 'the World'
+  }
+
+  if (currentRegion.slug === 'americas') {
+    return 'the Americas'
+  }
+
+  return currentRegion.slug.charAt(0).toUpperCase() + currentRegion.slug.slice(1)
+})
+
+const pageTitle = computed(() => {
+  return `Flags of ${regionTitle.value}`
+})
+
+const pageDescription = computed(() => {
+  return currentRegion.description
+})
+
+useSeoMeta({
+  title: pageTitle,
+  description: pageDescription,
+})
+
 const regionCountries = computed(() => {
   if (currentRegion.slug === 'world') {
     return countries
@@ -72,10 +97,17 @@ const gameMeta = computed(() => {
           key="setup"
           class="space-y-8"
         >
-          <PlayHeader
-            :region="currentRegion.slug"
-            :countries="regionCountries"
-          />
+          <UPageHeader
+            headline="Let's guess"
+            :title="pageTitle"
+            :description="pageDescription"
+          >
+            <UPageGrid class="mt-10">
+              <PlayHeaderCountries :countries="regionCountries" :region-title="regionTitle" />
+              <PlayHeaderTerritories :countries="regionCountries" :region-title="regionTitle" />
+              <PlayHeaderPopulation :countries="regionCountries" :region-title="regionTitle" />
+            </UPageGrid>
+          </UPageHeader>
 
           <URadioGroup
             v-model="scopeQuery"
