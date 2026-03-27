@@ -13,14 +13,6 @@ if (!currentRegion) {
   })
 }
 
-updateAppConfig({
-  ui: {
-    colors: {
-      primary: currentRegion.color,
-    },
-  },
-})
-
 const regionCountries = computed(() => {
   if (currentRegion.slug === 'world') {
     return countries
