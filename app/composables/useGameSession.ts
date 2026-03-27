@@ -79,6 +79,30 @@ export function useGameSession(config: UseGameSessionConfig) {
     }
   })
 
+  const viewState = computed<'paused' | 'completed' | 'playing'>(() => {
+    if (runResult.value) {
+      return 'completed'
+    }
+
+    if (isPaused.value) {
+      return 'paused'
+    }
+
+    return 'playing'
+  })
+
+  function resetSession(): void {
+    clearAdvanceTimeout()
+    clearTimerInterval()
+    currentIndex.value = 0
+    elapsedSeconds.value = 0
+    correctCount.value = 0
+    finishedAt.value = null
+    runId.value = createRunId()
+    resetChoiceState()
+    isPaused.value = false
+  }
+
   function clearTimerInterval(): void {
     if (!timerInterval) {
       return
@@ -153,22 +177,11 @@ export function useGameSession(config: UseGameSessionConfig) {
   }
 
   function retry(): void {
-    clearAdvanceTimeout()
-    clearTimerInterval()
-    currentIndex.value = 0
-    elapsedSeconds.value = 0
-    correctCount.value = 0
-    finishedAt.value = null
-    runId.value = createRunId()
-    resetChoiceState()
-    isPaused.value = false
+    resetSession()
   }
 
   function resetForExit(): void {
-    clearAdvanceTimeout()
-    clearTimerInterval()
-    resetChoiceState()
-    isPaused.value = false
+    resetSession()
   }
 
   watch([isPaused, currentQuestion], ([paused, question]) => {
@@ -189,6 +202,13 @@ export function useGameSession(config: UseGameSessionConfig) {
     isPaused.value = false
   })
 
+  watch(
+    () => [config.questions, config.gameMeta.regionSlug, config.gameMeta.regionName, config.gameMeta.gameMode],
+    () => {
+      resetSession()
+    },
+  )
+
   onBeforeUnmount(() => {
     clearAdvanceTimeout()
     clearTimerInterval()
@@ -204,6 +224,7 @@ export function useGameSession(config: UseGameSessionConfig) {
     nextQuestion,
     choices,
     isCompleted,
+    viewState,
     runResult,
     showSuccessOverlay,
     showErrorOverlay,

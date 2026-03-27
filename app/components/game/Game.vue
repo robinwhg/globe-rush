@@ -25,15 +25,23 @@ function handleExit(): void {
   emit('back')
 }
 
+watch(
+  () => [props.questions, props.gameMeta.regionSlug, props.gameMeta.regionName, props.gameMeta.gameMode],
+  () => {
+    handleExit()
+  },
+)
+
 // FIXME: Hint for territories that have the same flag as country
 // FIXME: Alt text of images shouldn't have the name of the country in it
 // TODO: Stop timer at 60m & after 5m of inactivity pause
+// FIXME: Clicking on a header link will reset isCompleted but still show end card
 </script>
 
 <template>
   <section class="space-y-4">
     <GameHeader
-      v-if="!gameSession.isCompleted"
+      v-if="gameSession.viewState !== 'completed'"
       v-model:paused="gameSession.isPaused"
       :state="{
         currentQuestionNumber: gameSession.currentQuestionNumber,
@@ -44,14 +52,14 @@ function handleExit(): void {
 
     <Transition name="fade" mode="out-in">
       <GamePause
-        v-if="gameSession.isPaused"
+        v-if="gameSession.viewState === 'paused'"
         key="paused"
         @resume="gameSession.resume"
         @exit="handleExit"
       />
 
       <GameEndCard
-        v-else-if="gameSession.runResult"
+        v-else-if="gameSession.viewState === 'completed' && gameSession.runResult"
         key="completed"
         :result="gameSession.runResult"
         @retry="gameSession.retry"
