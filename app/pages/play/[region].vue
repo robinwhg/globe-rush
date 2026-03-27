@@ -61,6 +61,14 @@ const selectedCountries = computed(() => {
 
   return regionCountries.value
 })
+
+const gameMeta = computed(() => {
+  return {
+    regionSlug: currentRegion.slug,
+    regionName: currentRegion.title,
+    gameMode: scopeQuery.value,
+  }
+})
 </script>
 
 <template>
@@ -103,6 +111,7 @@ const selectedCountries = computed(() => {
         >
           <Game
             :questions="selectedCountries"
+            :game-meta="gameMeta"
             @back="hasStarted = false"
           />
         </UContainer>

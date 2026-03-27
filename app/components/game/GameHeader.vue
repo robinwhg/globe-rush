@@ -1,8 +1,12 @@
 <script setup lang="ts">
-interface GameHeaderProps {
+interface GameHeaderState {
   currentQuestionNumber: number
   totalQuestions: number
   elapsedSeconds: number
+}
+
+interface GameHeaderProps {
+  state: GameHeaderState
 }
 
 const props = defineProps<GameHeaderProps>()
@@ -12,16 +16,16 @@ const isPaused = defineModel<boolean>('paused', {
 })
 
 const progress = computed(() => {
-  if (props.totalQuestions === 0) {
+  if (props.state.totalQuestions === 0) {
     return 0
   }
 
-  return Math.round((props.currentQuestionNumber / props.totalQuestions) * 100)
+  return Math.round((props.state.currentQuestionNumber / props.state.totalQuestions) * 100)
 })
 
 const timerLabel = computed(() => {
-  const minutes = Math.floor(props.elapsedSeconds / 60).toString().padStart(2, '0')
-  const seconds = (props.elapsedSeconds % 60).toString().padStart(2, '0')
+  const minutes = Math.floor(props.state.elapsedSeconds / 60).toString().padStart(2, '0')
+  const seconds = (props.state.elapsedSeconds % 60).toString().padStart(2, '0')
 
   return `${minutes}:${seconds}`
 })
@@ -52,10 +56,12 @@ const timerLabel = computed(() => {
 
     <div class="order-3 lg:order-2 col-span-2 lg:col-span-3">
       <div class="flex flex-col gap-2 lg:max-w-2xl mx-auto">
-        <UProgress :model-value="progress" />
+        <UProgress
+          :model-value="progress"
+        />
         <div class="inline-flex items-center justify-between text-sm">
           <span class="font-semibold">
-            Flag {{ props.currentQuestionNumber }} of {{ props.totalQuestions }}
+            Flag {{ props.state.currentQuestionNumber }} of {{ props.state.totalQuestions }}
           </span>
           <span class="text-muted">
             {{ progress }} %
