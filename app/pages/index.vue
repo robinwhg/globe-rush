@@ -9,6 +9,7 @@
       >
         <template #footer>
           <UPageGrid>
+            <!-- TODO: Add loading state to the img -->
             <UPageCard
               v-for="r in playableRegions" :key="r.slug"
               :title="r.title"
