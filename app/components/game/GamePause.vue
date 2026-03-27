@@ -9,9 +9,12 @@ const emit = defineEmits<{
   <div class="grid grid-cols-2 items-stretch gap-4 max-w-2xl mx-auto">
     <Transition name="slide-side" appear>
       <UCard
-        variant="soft" :ui="{ root: 'col-span-2 dark:bg-default', body: 'p-4 sm:p-4 relative h-64 lg:h-80 flex items-center justify-center' }"
+        variant="soft" :ui="{ root: 'col-span-2', body: 'p-4 sm:p-4 relative h-64 lg:h-80 flex flex-col items-center justify-center text-dimmed' }"
       >
-        <UIcon name="i-tabler-player-pause-filled" class="size-20 lg:size-32 text-dimmed" />
+        <UIcon name="i-tabler-player-pause-filled" class="size-20 lg:size-32" />
+        <h2 class="text-xl font-semibold">
+          Game paused
+        </h2>
       </UCard>
     </Transition>
 
