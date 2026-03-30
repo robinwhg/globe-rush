@@ -41,17 +41,19 @@ watch(
 
 <template>
   <section class="space-y-4">
-    <GameHeader
-      v-if="gameSession.viewState !== 'completed'"
-      v-model:paused="gameSession.isPaused"
-      :state="{
-        currentQuestionNumber: gameSession.currentQuestionNumber,
-        answeredQuestions: gameSession.displayAnsweredQuestions,
-        totalQuestions: gameSession.totalQuestions,
-        elapsedSeconds: gameSession.elapsedSeconds,
-        isErrorFeedbackActive: gameSession.isErrorFeedbackActive,
-      }"
-    />
+    <Transition name="fade" mode="out-in">
+      <GameHeader
+        v-if="gameSession.viewState !== 'completed'"
+        v-model:paused="gameSession.isPaused"
+        :state="{
+          currentQuestionNumber: gameSession.currentQuestionNumber,
+          answeredQuestions: gameSession.displayAnsweredQuestions,
+          totalQuestions: gameSession.totalQuestions,
+          elapsedSeconds: gameSession.elapsedSeconds,
+          isErrorFeedbackActive: gameSession.isErrorFeedbackActive,
+        }"
+      />
+    </Transition>
 
     <Transition name="fade" mode="out-in">
       <GamePause
