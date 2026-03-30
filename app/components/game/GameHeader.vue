@@ -42,8 +42,8 @@ const timerLabel = computed(() => {
     </div>
 
     <div class="order-2 lg:order-3 flex items-center gap-2 justify-end">
-      <UIcon name="i-tabler-clock-filled" class="size-6" />
-      <span class="text-xl font-semibold">
+      <UIcon name="i-tabler-stopwatch" class="size-6" />
+      <span class="text-xl font-semibold font-mono">
         {{ timerLabel }}
       </span>
       <UButton
