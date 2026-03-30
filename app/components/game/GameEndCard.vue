@@ -34,15 +34,15 @@ const durationLabel = computed(() => {
 })
 
 const finishedAtLabel = computed(() => {
-  return new Intl.DateTimeFormat('en-US', {
-    dateStyle: 'medium',
+  return new Intl.DateTimeFormat(undefined, {
+    dateStyle: 'short',
     timeStyle: 'short',
   }).format(new Date(result.value.finishedAt))
 })
 
 const modeLabel = computed(() => {
   if (result.value.gameMode === 'both') {
-    return 'Both'
+    return 'Countries + Territories'
   }
 
   if (result.value.gameMode === 'territories') {
@@ -59,39 +59,73 @@ const accuracyPct = computed(() => {
 
   return Math.round((result.value.correctCount / result.value.totalQuestions) * 100)
 })
-
-// TODO: Add UI design
 </script>
 
 <template>
-  <div class="space-y-4">
-    <h2 class="text-xl font-semibold">
+  <div class="max-w-2xl mx-auto grid grid-cols-2 gap-4">
+    <h2 class="text-xl font-semibold col-span-2">
       Run complete!
     </h2>
-    <div class="grid grid-cols-2 items-stretch gap-4 max-w-2xl mx-auto">
-      <UCard :ui="{ root: 'col-span-2', body: 'p-4 sm:p-4 relative h-64 lg:h-80' }">
-        <ul>
-          <li>Accuracy: {{ accuracyPct }} %</li>
-          <li>Correctness: {{ props.result.correctCount }} / {{ result.totalQuestions }}</li>
-          <li>Time: {{ durationLabel }}</li>
-          <li>Mode: {{ modeLabel }}</li>
-          <li>Region: {{ result.regionName }}</li>
-          <li>Date: {{ finishedAtLabel }}</li>
-        </ul>
-      </UCard>
 
-      <BaseCardButton
-        icon="i-tabler-reload"
-        label="Retry"
-        @click="emit('retry')"
+    <UCard :ui="{ root: 'col-span-2 divide-none', body: 'grid grid-cols-2 items-stretch gap-4' }">
+      <template #header>
+        <div class="flex flex-col gap-2 col-span-2">
+          <p class="text-base text-pretty font-semibold text-highlighted">
+            Accuracy
+          </p>
+          <UProgress
+            :model-value="props.result.correctCount"
+            :max="result.totalQuestions"
+            color="success"
+            :ui="{ base: 'bg-error' }"
+          />
+          <div class="inline-flex items-center justify-between text-sm">
+            <span class="font-semibold">
+              {{ props.result.correctCount }} out of {{ result.totalQuestions }} Flags
+            </span>
+            <span class="text-muted">
+              {{ accuracyPct }} %
+            </span>
+          </div>
+        </div>
+      </template>
+
+      <UPageFeature
+        icon="i-tabler-map-pin"
+        :title="result.regionName"
+        description="Region"
       />
 
-      <BaseCardButton
-        color="primary"
-        icon="i-tabler-arrow-forward"
-        label="Continue"
-        @click="emit('back')"
+      <UPageFeature
+        icon="i-tabler-flag"
+        :title="modeLabel"
+        description="Mode"
       />
-    </div>
+
+      <UPageFeature
+        icon="i-tabler-stopwatch"
+        :title="durationLabel"
+        description="Time"
+      />
+
+      <UPageFeature
+        icon="i-tabler-clock"
+        :title="finishedAtLabel"
+        description="Date"
+      />
+    </UCard>
+
+    <BaseCardButton
+      icon="i-tabler-reload"
+      label="Retry"
+      @click="emit('retry')"
+    />
+
+    <BaseCardButton
+      color="primary"
+      icon="i-tabler-arrow-forward"
+      label="Continue"
+      @click="emit('back')"
+    />
   </div>
 </template>
