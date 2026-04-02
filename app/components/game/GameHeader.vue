@@ -1,52 +1,40 @@
 <script setup lang="ts">
-interface GameHeaderState {
-  currentQuestionNumber: number
-  answeredQuestions: number
+const props = defineProps<{
+  currentIndex: number
   totalQuestions: number
-  elapsedSeconds: number
-  isErrorFeedbackActive: boolean
-}
+}>()
 
-interface GameHeaderProps {
-  state: GameHeaderState
-}
+const { currentIndex, totalQuestions } = toRefs(props)
 
-const props = defineProps<GameHeaderProps>()
-const { state } = toRefs(props)
-
-const isPaused = defineModel<boolean>('paused', {
+const isPaused = defineModel<boolean>('is-paused', {
   default: false,
 })
 
 const progress = computed(() => {
-  if (state.value.totalQuestions === 0) {
+  if (totalQuestions.value === 0) {
     return 0
   }
 
-  return Math.round((state.value.answeredQuestions / state.value.totalQuestions) * 100)
+  return Math.round((currentIndex.value / totalQuestions.value) * 100)
 })
 
-const timerLabel = computed(() => {
-  const minutes = Math.floor(state.value.elapsedSeconds / 60).toString().padStart(2, '0')
-  const seconds = (state.value.elapsedSeconds % 60).toString().padStart(2, '0')
-
-  return `${minutes}:${seconds}`
-})
+// FIXME: Shown progress should be increased when choice animation is running
 </script>
 
 <template>
   <div class="grid grid-cols-2 lg:grid-cols-5 items-center gap-4">
     <div class="order-1 lg:order-1 col-span-1">
-      <h2 class="text-xl font-semibold">
+      <p class="text-xl font-semibold">
         What flag is this?
-      </h2>
+      </p>
     </div>
 
     <div class="order-2 lg:order-3 flex items-center gap-2 justify-end">
-      <UIcon name="i-tabler-stopwatch" class="size-6" />
+      <UIcon name="i-tabler-stopwatch" class="shrink-0 size-6" />
       <span class="text-xl font-semibold font-mono">
-        {{ timerLabel }}
+        01:00
       </span>
+
       <UButton
         :icon="isPaused ? 'i-tabler-player-play-filled' : 'i-tabler-player-pause-filled'"
         :aria-label="isPaused ? 'resume' : 'pause'"
@@ -61,12 +49,10 @@ const timerLabel = computed(() => {
       <div class="flex flex-col gap-2 lg:max-w-2xl mx-auto">
         <UProgress
           :model-value="progress"
-          :color="state.isErrorFeedbackActive ? 'error' : 'primary'"
-          :ui="{ indicator: state.isErrorFeedbackActive ? 'animate-pulse' : '' }"
         />
         <div class="inline-flex items-center justify-between text-sm">
           <span class="font-semibold">
-            Flag {{ state.currentQuestionNumber }} of {{ state.totalQuestions }}
+            Flag {{ currentIndex }} of {{ totalQuestions }}
           </span>
           <span class="text-muted">
             {{ progress }} %

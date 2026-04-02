@@ -1,5 +1,7 @@
 import rawCountries from '../countries.json'
 
+// FIXME: Alt text of images shouldn't have the name of the country in it
+
 export interface Country {
   name: {
     common: string

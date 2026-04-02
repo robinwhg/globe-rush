@@ -1,63 +1,74 @@
 const CHOICE_COUNT = 4
 const ADVANCE_DELAY = 600
 
+export interface Choice {
+  country: Country
+  isCorrect: boolean
+  showOverlay: Ref<boolean>
+}
+
+// TODO: Add timer (stop at 60m & after 5m of inactivity pause)
+// TODO: Setup choices pool to be closely related to question
+
 export function useGame(countries: Country[]) {
+  const isPaused = ref(false)
   const questions = ref(shuffle(countries))
-  const currentIndex = ref(0)
-  const currentQuestion = computed(() => questions.value[currentIndex.value])
+  const index = ref(0)
   const wrongQuestions = ref<Country[]>([])
 
-  const isPaused = ref(false)
-  const isFinished = computed(() => questions.value.length >= currentIndex.value + 1)
-
-  interface Choice {
-    country: Country
-    isCorrect: boolean
-    showOverlay: Ref<boolean>
-  }
-
+  const isFinished = computed(() => index.value >= questions.value.length)
+  const question = computed(() => questions.value[index.value])
+  const totalQuestions = computed(() => questions.value.length)
+  const totalCorrectQuestions = computed(() => questions.value.length - wrongQuestions.value.length)
   const choices = computed(() => {
-    if (!currentQuestion.value)
+    if (!question.value)
       return []
 
-    const distractors = shuffle(countries.filter(country => country.cca3 !== currentQuestion.value?.cca3)).slice(0, CHOICE_COUNT - 1)
+    const distractors = shuffle(countries.filter(country => country.cca3 !== question.value?.cca3)).slice(0, CHOICE_COUNT - 1)
+    const choicePool = shuffle([question.value, ...distractors])
 
-    const choicePool = shuffle([currentQuestion.value, ...distractors])
-
-    const choices = choicePool.map((choice) => {
+    return choicePool.map((choice) => {
       return {
         country: choice,
-        isCorrect: choice.cca3 === currentQuestion.value?.cca3,
+        isCorrect: choice.cca3 === question.value?.cca3,
         showOverlay: ref(false),
       }
     })
-
-    return choices
   })
 
   function selectChoice(choice: Choice) {
-    if (!currentQuestion.value)
+    if (!question.value)
       return
 
     if (!choice.isCorrect)
-      wrongQuestions.value.push(currentQuestion.value)
+      wrongQuestions.value.push(question.value)
 
     choice.showOverlay.value = true
 
     setTimeout(() => {
-      currentIndex.value += 1
+      index.value += 1
       choice.showOverlay.value = false
     }, ADVANCE_DELAY)
+  }
+  function retry() {
+    questions.value = shuffle(countries)
+    index.value = 0
+    wrongQuestions.value = []
+    isPaused.value = false
   }
 
   return {
     isPaused,
-    isFinished,
     questions,
-    currentIndex,
-    currentQuestion,
+    index,
+    wrongQuestions,
+    isFinished,
+    question,
+    totalQuestions,
+    totalCorrectQuestions,
     choices,
     selectChoice,
+    retry,
   }
 }
 

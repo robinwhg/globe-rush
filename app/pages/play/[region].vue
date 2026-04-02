@@ -38,7 +38,7 @@ const regionCountries = computed(() => {
 })
 
 const selectedCountries = computed(() => {
-  return regionCountries.value
+  return regionCountries.value.filter(x => x.independent === false)
 })
 
 const hasStarted = ref(false)
