@@ -2,12 +2,12 @@
 import { countries as allCountries } from '~/utils/countries'
 
 interface PlayHeaderTerritoriesProps {
-  regionTitle: string
+  title: string
   countries: Country[]
 }
 
 const props = defineProps<PlayHeaderTerritoriesProps>()
-const { regionTitle, countries } = toRefs(props)
+const { title, countries } = toRefs(props)
 
 const integerFormatter = new Intl.NumberFormat('en-US')
 
@@ -32,11 +32,11 @@ const countLabel = computed(() => {
 })
 
 const modalTitle = computed(() => {
-  return `Territories of ${regionTitle.value}`
+  return `Territories of ${title.value}`
 })
 
 const modalDescription = computed(() => {
-  return `All overseas regions and dependencies of ${regionTitle.value}`
+  return `All overseas regions and dependencies of ${title.value}`
 })
 
 function getSovereignName(country: Country): string {
@@ -49,7 +49,7 @@ function getSovereignName(country: Country): string {
 </script>
 
 <template>
-  <PlayHeaderStatOverlay
+  <PlayHeaderCard
     icon="i-tabler-flag-3-filled"
     :value="countLabel"
     label="Territories"

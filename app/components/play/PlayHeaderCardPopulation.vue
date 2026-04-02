@@ -1,11 +1,11 @@
 <script setup lang="ts">
 interface PlayHeaderPopulationProps {
-  regionTitle: string
+  title: string
   countries: Country[]
 }
 
 const props = defineProps<PlayHeaderPopulationProps>()
-const { regionTitle, countries } = toRefs(props)
+const { title, countries } = toRefs(props)
 
 const compactFormatter = new Intl.NumberFormat('en-US', {
   notation: 'compact',
@@ -26,22 +26,22 @@ const countLabel = computed(() => {
 })
 
 const modalTitle = computed(() => {
-  return `Population of ${regionTitle.value}`
+  return `Population of ${title.value}`
 })
 
 const modalDescription = computed(() => {
-  return `A breakdown of population figures of ${regionTitle.value}`
+  return `A breakdown of population figures of ${title.value}`
 })
 </script>
 
 <template>
-  <PlayHeaderStatOverlay
+  <PlayHeaderCard
     icon="i-tabler-user-filled"
     :value="countLabel"
     label="Population"
     :title="modalTitle"
     :description="modalDescription"
     :items="populationList"
-    :description-resolver="country => compactFormatter.format(country.population)"
+    :description-resolver="(country: Country) => compactFormatter.format(country.population)"
   />
 </template>

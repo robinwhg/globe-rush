@@ -43,6 +43,8 @@ watch(open, (isOpen) => {
 })
 
 const [DefineBodyTemplate, ReuseBodyTemplate] = createReusableTemplate()
+
+// FIXME: Set fixed height
 </script>
 
 <template>
@@ -59,6 +61,7 @@ const [DefineBodyTemplate, ReuseBodyTemplate] = createReusableTemplate()
       <DefineBodyTemplate>
         <div class="flex h-full flex-col gap-2">
           <UInput
+            v-if="items.length > 10"
             v-model="searchQuery"
             variant="soft"
             icon="i-tabler-search"

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 interface PlayHeaderCountriesProps {
-  regionTitle: string
+  title: string
   countries: Country[]
 }
 
 const props = defineProps<PlayHeaderCountriesProps>()
-const { regionTitle, countries } = toRefs(props)
+const { title, countries } = toRefs(props)
 
 const integerFormatter = new Intl.NumberFormat('en-US')
 
@@ -20,22 +20,22 @@ const countLabel = computed(() => {
 })
 
 const modalTitle = computed(() => {
-  return `Countries of ${regionTitle.value}`
+  return `Countries of ${title.value}`
 })
 
 const modalDescription = computed(() => {
-  return `All sovereign and independent countries of ${regionTitle.value}`
+  return `All sovereign and independent countries of ${title.value}`
 })
 </script>
 
 <template>
-  <PlayHeaderStatOverlay
+  <PlayHeaderCard
     icon="i-tabler-flag-filled"
     :value="countLabel"
     label="Countries"
     :title="modalTitle"
     :description="modalDescription"
     :items="countriesList"
-    :description-resolver="country => country.name.official"
+    :description-resolver="(country: Country) => country.name.official"
   />
 </template>
