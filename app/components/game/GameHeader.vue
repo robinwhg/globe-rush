@@ -2,9 +2,10 @@
 const props = defineProps<{
   currentIndex: number
   totalQuestions: number
+  timerLabel: string
 }>()
 
-const { currentIndex, totalQuestions } = toRefs(props)
+const { currentIndex, totalQuestions, timerLabel } = toRefs(props)
 
 const isPaused = defineModel<boolean>('is-paused', {
   default: false,
@@ -32,7 +33,7 @@ const progress = computed(() => {
     <div class="order-2 lg:order-3 flex items-center gap-2 justify-end">
       <UIcon name="i-tabler-stopwatch" class="shrink-0 size-6" />
       <span class="text-xl font-semibold font-mono">
-        01:00
+        {{ timerLabel }}
       </span>
 
       <UButton

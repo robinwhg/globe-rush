@@ -9,7 +9,7 @@ const emit = defineEmits<{
 
 const { countries } = toRefs(props)
 
-const { choices, retry, selectChoice, totalCorrectQuestions, totalQuestions, index, question, isFinished, isPaused } = useGame(countries.value)
+const { choices, retry, selectChoice, totalCorrectQuestions, totalQuestions, index, question, isFinished, isPaused, timerLabel } = useGame(countries.value)
 
 // FIXME: Show hint for territories that have the same flag as country
 </script>
@@ -22,6 +22,7 @@ const { choices, retry, selectChoice, totalCorrectQuestions, totalQuestions, ind
           v-model:is-paused="isPaused"
           :current-index="index"
           :total-questions
+          :timer-label="timerLabel"
         />
 
         <Transition name="fade" mode="out-in" class="max-w-2xl mx-auto">
@@ -44,6 +45,7 @@ const { choices, retry, selectChoice, totalCorrectQuestions, totalQuestions, ind
         v-else
         :total-questions
         :total-correct-questions
+        :timer-label="timerLabel"
         @retry="retry"
         @back="emit('back')"
       />

@@ -2,6 +2,7 @@
 const props = defineProps<{
   totalQuestions: number
   totalCorrectQuestions: number
+  timerLabel: string
 }>()
 
 const emit = defineEmits<{
@@ -9,7 +10,7 @@ const emit = defineEmits<{
   back: []
 }>()
 
-const { totalQuestions, totalCorrectQuestions } = toRefs(props)
+const { totalQuestions, totalCorrectQuestions, timerLabel } = toRefs(props)
 
 const accuracyPct = computed(() => {
   if (totalQuestions.value === 0)
@@ -28,7 +29,7 @@ const accuracyPct = computed(() => {
     </p>
 
     <div class="max-w-2xl mx-auto grid grid-cols-2 gap-4">
-      <UCard :ui="{ root: 'col-span-2 dark:bg-default divide-none', header: 'min-h-10' }">
+      <UCard :ui="{ root: 'col-span-2 dark:bg-default divide-none', header: 'min-h-10', body: 'flex flex-col gap-4' }">
         <template #header>
           <p class="text-xl font-semibold">
             Your score
@@ -53,6 +54,16 @@ const accuracyPct = computed(() => {
               {{ accuracyPct }} %
             </span>
           </div>
+        </div>
+
+        <div class="inline-flex items-center justify-between">
+          <span class="inline-flex items-center gap-1 text-base text-pretty font-semibold text-highlighted">
+            <UIcon name="i-tabler-stopwatch" class="size-5 shrink-0" />
+            Time
+          </span>
+          <span class="text-muted font-mono">
+            {{ timerLabel }}
+          </span>
         </div>
       </UCard>
 

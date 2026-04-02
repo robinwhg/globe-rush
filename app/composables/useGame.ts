@@ -15,11 +15,23 @@ export function useGame(countries: Country[]) {
   const questions = ref(shuffle(countries))
   const index = ref(0)
   const wrongQuestions = ref<Country[]>([])
+  const elapsedSeconds = ref(0)
 
   const isFinished = computed(() => index.value >= questions.value.length)
   const question = computed(() => questions.value[index.value])
   const totalQuestions = computed(() => questions.value.length)
   const totalCorrectQuestions = computed(() => questions.value.length - wrongQuestions.value.length)
+  const timerLabel = computed(() => {
+    const minutes = Math.floor(elapsedSeconds.value / 60)
+      .toString()
+      .padStart(2, '0')
+
+    const seconds = (elapsedSeconds.value % 60)
+      .toString()
+      .padStart(2, '0')
+
+    return `${minutes}:${seconds}`
+  })
   const choices = computed(() => {
     if (!question.value)
       return []
@@ -54,14 +66,28 @@ export function useGame(countries: Country[]) {
     questions.value = shuffle(countries)
     index.value = 0
     wrongQuestions.value = []
+    elapsedSeconds.value = 0
     isPaused.value = false
   }
+
+  const timer = setInterval(() => {
+    if (isPaused.value || isFinished.value)
+      return
+
+    elapsedSeconds.value += 1
+  }, 1000)
+
+  onScopeDispose(() => {
+    clearInterval(timer)
+  })
 
   return {
     isPaused,
     questions,
     index,
     wrongQuestions,
+    elapsedSeconds,
+    timerLabel,
     isFinished,
     question,
     totalQuestions,
