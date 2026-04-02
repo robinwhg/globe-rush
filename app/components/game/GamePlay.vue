@@ -2,13 +2,14 @@
 const props = defineProps<{
   question: Country
   choices: Choice[]
+  isAdvancing: boolean
 }>()
 
 const emit = defineEmits<{
   (e: 'selectChoice', choice: Choice): void
 }>()
 
-const { question, choices } = toRefs(props)
+const { question, choices, isAdvancing } = toRefs(props)
 </script>
 
 <template>
@@ -31,6 +32,7 @@ const { question, choices } = toRefs(props)
           }"
         >
           <BaseCardButton
+            :disabled="isAdvancing"
             :label="choice.country.name.common"
             @click="emit('selectChoice', choice)"
           />

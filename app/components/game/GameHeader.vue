@@ -3,9 +3,10 @@ const props = defineProps<{
   currentIndex: number
   totalQuestions: number
   timerLabel: string
+  isAdvancing: boolean
 }>()
 
-const { currentIndex, totalQuestions, timerLabel } = toRefs(props)
+const { currentIndex, totalQuestions, timerLabel, isAdvancing } = toRefs(props)
 
 const isPaused = defineModel<boolean>('is-paused', {
   default: false,
@@ -16,10 +17,10 @@ const progress = computed(() => {
     return 0
   }
 
-  return Math.round((currentIndex.value / totalQuestions.value) * 100)
-})
+  const progressValue = Math.round(((currentIndex.value + (isAdvancing.value ? 1 : 0)) / totalQuestions.value) * 100)
 
-// FIXME: Shown progress should be increased when choice animation is running
+  return Math.min(progressValue, 100)
+})
 </script>
 
 <template>

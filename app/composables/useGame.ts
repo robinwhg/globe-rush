@@ -12,6 +12,7 @@ export interface Choice {
 
 export function useGame(countries: Country[]) {
   const isPaused = ref(false)
+  const isAdvancing = ref(false)
   const questions = ref(shuffle(countries))
   const index = ref(0)
   const wrongQuestions = ref<Country[]>([])
@@ -49,8 +50,10 @@ export function useGame(countries: Country[]) {
   })
 
   function selectChoice(choice: Choice) {
-    if (!question.value)
+    if (!question.value || isAdvancing.value)
       return
+
+    isAdvancing.value = true
 
     if (!choice.isCorrect)
       wrongQuestions.value.push(question.value)
@@ -60,6 +63,7 @@ export function useGame(countries: Country[]) {
     setTimeout(() => {
       index.value += 1
       choice.showOverlay.value = false
+      isAdvancing.value = false
     }, ADVANCE_DELAY)
   }
   function retry() {
@@ -68,6 +72,7 @@ export function useGame(countries: Country[]) {
     wrongQuestions.value = []
     elapsedSeconds.value = 0
     isPaused.value = false
+    isAdvancing.value = false
   }
 
   const timer = setInterval(() => {
@@ -83,6 +88,7 @@ export function useGame(countries: Country[]) {
 
   return {
     isPaused,
+    isAdvancing,
     questions,
     index,
     wrongQuestions,
