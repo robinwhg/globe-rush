@@ -3,7 +3,9 @@
     <TheHeader />
 
     <UMain>
-      <slot />
+      <UContainer>
+        <slot />
+      </UContainer>
     </UMain>
 
     <TheFooter />

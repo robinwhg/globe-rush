@@ -40,26 +40,24 @@ const regionCountries = computed(() => {
 
 <template>
   <UPage>
-    <UPageBody>
-      <UContainer>
-        <div class="flex flex-col gap-8">
-          <PlayHeader
-            :title="pageTitle"
-            :description="pageDescription"
-            :countries="regionCountries"
-          />
+    <PlayHeader
+      :title="pageTitle"
+      :description="pageDescription"
+      :countries="regionCountries"
+    />
 
-          <UPageGrid>
-            <UPageCard
-              v-for="game in currentRegion.games"
-              :key="game.slug"
-              :title="game.title"
-              :to="`/play/${currentRegion.slug}/${game.slug}`"
-              class="transition-transform hover:scale-105"
-            />
-          </UPageGrid>
-        </div>
-      </UContainer>
+    <UPageBody>
+      <div class="flex flex-col gap-8">
+        <UPageGrid>
+          <UPageCard
+            v-for="game in currentRegion.games"
+            :key="game.slug"
+            :title="game.title"
+            :to="`/play/${currentRegion.slug}/${game.slug}`"
+            class="transition-transform hover:scale-105"
+          />
+        </UPageGrid>
+      </div>
     </UPageBody>
   </UPage>
 </template>

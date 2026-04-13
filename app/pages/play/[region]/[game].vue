@@ -48,16 +48,14 @@ function onBack() {
 <template>
   <UPage>
     <UPageBody>
-      <UContainer>
-        <ClientOnly>
-          <Game
-            :countries="gameCountries"
-            :game-title="currentGame.title"
-            :region-title="`Flags of ${regionTitle}`"
-            @back="onBack"
-          />
-        </ClientOnly>
-      </UContainer>
+      <ClientOnly>
+        <Game
+          :countries="gameCountries"
+          :game-title="currentGame.title"
+          :region-title="`Flags of ${regionTitle}`"
+          @back="onBack"
+        />
+      </ClientOnly>
     </UPageBody>
   </UPage>
 </template>
