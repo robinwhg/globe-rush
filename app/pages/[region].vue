@@ -48,6 +48,10 @@ const regionCountries = computed(() => {
 
     <UPageBody>
       <div class="flex flex-col gap-8">
+        <p class="text-xl font-semibold">
+          Select a game to play:
+        </p>
+
         <UPageGrid>
           <UPageCard
             v-for="game in currentRegion.games"
