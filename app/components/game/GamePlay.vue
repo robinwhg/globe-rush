@@ -13,7 +13,7 @@ const { question, choices, isAdvancing } = toRefs(props)
 </script>
 
 <template>
-  <GameStateLayout>
+  <GameStateLayout :content-key="question.cca3">
     <template #content>
       <GameImage
         :key="question.cca3"
