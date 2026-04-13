@@ -11,30 +11,35 @@ const emit = defineEmits<{
 
 const { countries, gameTitle, regionTitle } = toRefs(props)
 
-const { choices, retry, selectChoice, totalCorrectQuestions, totalQuestions, index, question, isFinished, isPaused, isAdvancing, timerLabel } = useGame(countries.value)
-const hasStarted = ref(false)
+const { gameState, choices, retry, selectChoice, totalCorrectQuestions, totalQuestions, index, question, isAdvancing, timerLabel, startGame, pauseGame, resumeGame, stopToStart } = useGame(countries.value)
 
-isPaused.value = true
+function togglePause() {
+  if (gameState.value === 'play') {
+    pauseGame()
+    return
+  }
 
-function startGame() {
-  hasStarted.value = true
-  isPaused.value = false
-}
-
-function stopToStart() {
-  retry()
-  hasStarted.value = false
-  isPaused.value = true
+  if (gameState.value === 'pause')
+    resumeGame()
 }
 
 // FIXME: Show hint for territories that have the same flag as country
 </script>
 
 <template>
-  <div>
+  <div class="space-y-4">
+    <GameHeader
+      :current-index="index"
+      :total-questions
+      :timer-label="timerLabel"
+      :is-advancing="isAdvancing"
+      :game-state="gameState"
+      @toggle-pause="togglePause"
+    />
+
     <Transition name="fade" mode="out-in">
       <GameStart
-        v-if="!hasStarted"
+        v-if="gameState === 'start'"
         :game-title="gameTitle"
         :region-title="regionTitle"
         :countries="countries"
@@ -42,44 +47,30 @@ function stopToStart() {
         @back="emit('back')"
       />
 
-      <div v-else>
-        <Transition name="fade" mode="out-in">
-          <div v-if="!isFinished && question" class="space-y-4">
-            <GameHeader
-              v-model:is-paused="isPaused"
-              :current-index="index"
-              :total-questions
-              :timer-label="timerLabel"
-              :is-advancing="isAdvancing"
-            />
-
-            <Transition name="fade" mode="out-in">
-              <GamePause
-                v-if="isPaused"
-                @resume="isPaused = false"
-                @exit="stopToStart"
-              />
-
-              <GamePlay
-                v-else
-                :question="question"
-                :choices="choices"
-                :is-advancing="isAdvancing"
-                @select-choice="choice => selectChoice(choice)"
-              />
-            </Transition>
-          </div>
-
-          <GameEnd
-            v-else
-            :total-questions
-            :total-correct-questions
-            :timer-label="timerLabel"
-            @retry="retry"
-            @back="emit('back')"
-          />
-        </Transition>
+      <div v-else-if="gameState === 'play'" class="space-y-4">
+        <GamePlay
+          :question="question!"
+          :choices="choices"
+          :is-advancing="isAdvancing"
+          @select-choice="choice => selectChoice(choice)"
+        />
       </div>
+
+      <div v-else-if="gameState === 'pause'" class="space-y-4">
+        <GamePause
+          @resume="resumeGame"
+          @exit="stopToStart"
+        />
+      </div>
+
+      <GameEnd
+        v-else
+        :total-questions
+        :total-correct-questions
+        :timer-label="timerLabel"
+        @retry="retry"
+        @back="emit('back')"
+      />
     </Transition>
   </div>
 </template>

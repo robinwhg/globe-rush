@@ -7,11 +7,13 @@ export interface Choice {
   showOverlay: Ref<boolean>
 }
 
+export type GameState = 'start' | 'play' | 'pause' | 'end'
+
 // TODO: Add timer (stop at 60m & after 5m of inactivity pause)
 // TODO: Setup choices pool to be closely related to question
 
 export function useGame(countries: Country[]) {
-  const isPaused = ref(false)
+  const gameState = ref<GameState>('start')
   const isAdvancing = ref(false)
   const questions = ref(shuffle(countries))
   const index = ref(0)
@@ -50,7 +52,7 @@ export function useGame(countries: Country[]) {
   })
 
   function selectChoice(choice: Choice) {
-    if (!question.value || isAdvancing.value)
+    if (gameState.value !== 'play' || !question.value || isAdvancing.value)
       return
 
     isAdvancing.value = true
@@ -64,19 +66,50 @@ export function useGame(countries: Country[]) {
       index.value += 1
       choice.showOverlay.value = false
       isAdvancing.value = false
+
+      if (index.value >= questions.value.length)
+        gameState.value = 'end'
     }, ADVANCE_DELAY)
   }
-  function retry() {
+
+  function resetRun() {
     questions.value = shuffle(countries)
     index.value = 0
     wrongQuestions.value = []
     elapsedSeconds.value = 0
-    isPaused.value = false
     isAdvancing.value = false
   }
 
+  function startGame() {
+    gameState.value = questions.value.length > 0 ? 'play' : 'end'
+  }
+
+  function pauseGame() {
+    if (gameState.value !== 'play' || isAdvancing.value)
+      return
+
+    gameState.value = 'pause'
+  }
+
+  function resumeGame() {
+    if (gameState.value !== 'pause')
+      return
+
+    gameState.value = 'play'
+  }
+
+  function retry() {
+    resetRun()
+    gameState.value = questions.value.length > 0 ? 'play' : 'end'
+  }
+
+  function stopToStart() {
+    resetRun()
+    gameState.value = 'start'
+  }
+
   const timer = setInterval(() => {
-    if (isPaused.value || isFinished.value)
+    if (gameState.value !== 'play')
       return
 
     elapsedSeconds.value += 1
@@ -87,7 +120,7 @@ export function useGame(countries: Country[]) {
   })
 
   return {
-    isPaused,
+    gameState,
     isAdvancing,
     questions,
     index,
@@ -99,7 +132,11 @@ export function useGame(countries: Country[]) {
     totalQuestions,
     totalCorrectQuestions,
     choices,
+    startGame,
+    pauseGame,
+    resumeGame,
     selectChoice,
+    stopToStart,
     retry,
   }
 }

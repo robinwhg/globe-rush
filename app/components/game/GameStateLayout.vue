@@ -1,12 +1,10 @@
 <template>
-  <div class="space-y-8">
-    <p v-if="$slots.title" class="text-xl font-semibold">
-      <slot name="title" />
-    </p>
-
+  <div class="space-y-4">
     <div class="max-w-2xl mx-auto space-y-4">
       <Transition name="slide-side" mode="out-in" appear>
-        <slot name="content" />
+        <UCard :ui="{ root: 'dark:bg-default', body: 'p-4 sm:p-4 relative h-64 lg:h-80' }">
+          <slot name="content" />
+        </UCard>
       </Transition>
 
       <Transition

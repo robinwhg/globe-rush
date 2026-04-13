@@ -24,17 +24,11 @@ const accuracyPct = computed(() => {
 
 <template>
   <GameStateLayout>
-    <template #title>
-      Run complete!
-    </template>
-
     <template #content>
-      <UCard :ui="{ root: 'dark:bg-default divide-none', header: 'min-h-10', body: 'flex flex-col gap-4' }">
-        <template #header>
-          <p class="text-xl font-semibold">
-            Your score
-          </p>
-        </template>
+      <div class="flex h-full flex-col gap-4 overflow-y-auto">
+        <p class="text-xl font-semibold">
+          Your score
+        </p>
 
         <div class="flex flex-col gap-2">
           <p class="text-base text-pretty font-semibold text-highlighted">
@@ -65,7 +59,7 @@ const accuracyPct = computed(() => {
             {{ timerLabel }}
           </span>
         </div>
-      </UCard>
+      </div>
     </template>
 
     <template #actions>

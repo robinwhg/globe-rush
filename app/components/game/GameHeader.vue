@@ -1,66 +1,96 @@
 <script setup lang="ts">
+import type { GameState } from '~/composables/useGame'
+
 const props = defineProps<{
   currentIndex: number
   totalQuestions: number
   timerLabel: string
   isAdvancing: boolean
+  gameState: GameState
 }>()
 
-const { currentIndex, totalQuestions, timerLabel, isAdvancing } = toRefs(props)
+const emit = defineEmits<{
+  togglePause: []
+}>()
 
-const isPaused = defineModel<boolean>('is-paused', {
-  default: false,
-})
-
-const progress = computed(() => {
-  if (totalQuestions.value === 0) {
-    return 0
-  }
-
-  const progressValue = Math.round(((currentIndex.value + (isAdvancing.value ? 1 : 0)) / totalQuestions.value) * 100)
-
-  return Math.min(progressValue, 100)
-})
+const { currentIndex, totalQuestions, timerLabel, isAdvancing, gameState } = toRefs(props)
 </script>
 
 <template>
-  <div class="grid grid-cols-2 lg:grid-cols-5 items-center gap-4">
-    <div class="order-1 lg:order-1 col-span-1">
-      <p class="text-xl font-semibold">
-        What flag is this?
-      </p>
+  <Transition name="fade" mode="out-in">
+    <div
+      v-if="gameState === 'start'"
+      key="start"
+      class="grid grid-cols-2 lg:grid-cols-5 items-center gap-4"
+    >
+      <div
+        class="order-1 lg:order-1 col-span-2 lg:col-span-5"
+      >
+        <p class="text-xl font-semibold">
+          Ready to start?
+        </p>
+      </div>
     </div>
 
-    <div class="order-2 lg:order-3 flex items-center gap-2 justify-end">
-      <UIcon name="i-tabler-stopwatch" class="shrink-0 size-6" />
-      <span class="text-xl font-semibold font-mono">
-        {{ timerLabel }}
-      </span>
+    <div
+      v-else-if="gameState === 'play' || gameState === 'pause'"
+      key="run"
+      class="grid grid-cols-2 lg:grid-cols-5 items-center gap-4"
+    >
+      <div class="order-1 lg:order-1 col-span-1">
+        <p class="text-xl font-semibold">
+          What flag is this?
+        </p>
+      </div>
 
-      <UButton
-        :icon="isPaused ? 'i-tabler-player-play-filled' : 'i-tabler-player-pause-filled'"
-        :aria-label="isPaused ? 'resume' : 'pause'"
-        color="neutral"
-        variant="ghost"
-        size="xl"
-        @click="isPaused = !isPaused"
-      />
-    </div>
-
-    <div class="order-3 lg:order-2 col-span-2 lg:col-span-3">
-      <div class="flex flex-col gap-2 lg:max-w-2xl mx-auto">
-        <UProgress
-          :model-value="progress"
+      <div class="order-2 lg:order-3 flex items-center gap-2 justify-end">
+        <UIcon name="i-tabler-stopwatch" class="shrink-0 size-6" />
+        <span class="text-xl font-semibold font-mono">
+          {{ timerLabel }}
+        </span>
+        <UButton
+          :icon="gameState === 'pause' ? 'i-tabler-player-play-filled' : 'i-tabler-player-pause-filled'"
+          :aria-label="gameState === 'pause' ? 'resume' : 'pause'"
+          color="neutral"
+          variant="ghost"
+          size="xl"
+          @click="emit('togglePause')"
         />
-        <div class="inline-flex items-center justify-between text-sm">
-          <span class="font-semibold">
-            Flag {{ currentIndex }} of {{ totalQuestions }}
-          </span>
-          <span class="text-muted">
-            {{ progress }} %
-          </span>
+      </div>
+
+      <div class="order-3 lg:order-2 col-span-2 lg:col-span-3">
+        <div class="flex flex-col gap-2 lg:max-w-2xl mx-auto">
+          <UProgress
+            :model-value="totalQuestions === 0
+              ? 0
+              : Math.min(Math.round(((currentIndex + (isAdvancing ? 1 : 0)) / totalQuestions) * 100), 100)"
+          />
+          <div class="inline-flex items-center justify-between text-sm">
+            <span class="font-semibold">
+              Flag {{ currentIndex }} of {{ totalQuestions }}
+            </span>
+            <span class="text-muted">
+              {{ totalQuestions === 0
+                ? 0
+                : Math.min(Math.round(((currentIndex + (isAdvancing ? 1 : 0)) / totalQuestions) * 100), 100) }} %
+            </span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+
+    <div
+      v-else
+      key="end"
+      class="grid grid-cols-2 lg:grid-cols-5 items-center gap-4"
+    >
+      <div
+        class="order-1 lg:order-1 col-span-2 lg:col-span-5"
+      >
+        <p class="text-xl font-semibold">
+          Run complete!
+        </p>
+      </div>
+    </div>
+  </Transition>
 </template>

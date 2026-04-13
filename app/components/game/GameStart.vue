@@ -19,17 +19,11 @@ const totalTerritories = computed(() => countries.value.filter(country => !count
 
 <template>
   <GameStateLayout>
-    <template #title>
-      Ready to start?
-    </template>
-
     <template #content>
-      <UCard :ui="{ root: 'dark:bg-default divide-none', header: 'min-h-10', body: 'flex flex-col gap-4' }">
-        <template #header>
-          <p class="text-xl font-semibold">
-            {{ gameTitle }}
-          </p>
-        </template>
+      <div class="flex h-full flex-col gap-4 overflow-y-auto">
+        <p class="text-xl font-semibold">
+          {{ gameTitle }}
+        </p>
 
         <p class="text-sm text-muted">
           {{ regionTitle }}
@@ -49,7 +43,7 @@ const totalTerritories = computed(() => countries.value.filter(country => !count
           <span class="font-semibold text-highlighted">Total flags asked</span>
           <span class="text-muted">{{ totalQuestions }}</span>
         </div>
-      </UCard>
+      </div>
     </template>
 
     <template #actions>
