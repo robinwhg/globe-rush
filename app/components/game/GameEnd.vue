@@ -18,8 +18,6 @@ const accuracyPct = computed(() => {
 
   return Math.round((totalCorrectQuestions.value / totalQuestions.value) * 100)
 })
-
-// TODO: Show more info
 </script>
 
 <template>

@@ -9,9 +9,6 @@ export interface Choice {
 
 export type GameState = 'start' | 'play' | 'pause' | 'end'
 
-// TODO: Add timer (stop at 60m & after 5m of inactivity pause)
-// TODO: Setup choices pool to be closely related to question
-
 export function useGame(countries: Country[]) {
   const gameState = ref<GameState>('start')
   const isAdvancing = ref(false)

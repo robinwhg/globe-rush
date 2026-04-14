@@ -22,8 +22,6 @@ function togglePause() {
   if (gameState.value === 'pause')
     resumeGame()
 }
-
-// FIXME: Show hint for territories that have the same flag as country
 </script>
 
 <template>

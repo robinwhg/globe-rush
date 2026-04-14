@@ -43,8 +43,6 @@ watch(open, (isOpen) => {
 })
 
 const [DefineBodyTemplate, ReuseBodyTemplate] = createReusableTemplate()
-
-// FIXME: Set fixed height
 </script>
 
 <template>
