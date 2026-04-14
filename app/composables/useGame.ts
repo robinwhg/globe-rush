@@ -1,5 +1,6 @@
 const CHOICE_COUNT = 4
 const ADVANCE_DELAY = 600
+const TIMER_TIMEOUT = 1000
 
 export interface Choice {
   country: Country
@@ -110,7 +111,7 @@ export function useGame(countries: Country[]) {
       return
 
     elapsedSeconds.value += 1
-  }, 1000)
+  }, TIMER_TIMEOUT)
 
   onScopeDispose(() => {
     clearInterval(timer)
