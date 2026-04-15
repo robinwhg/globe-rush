@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { GameState } from '~/composables/useGame'
 
-defineProps<{
+const props = defineProps<{
   currentIndex: number
   totalQuestions: number
   timerLabel: string
@@ -12,6 +12,17 @@ defineProps<{
 const emit = defineEmits<{
   togglePause: []
 }>()
+
+const { currentIndex, totalQuestions, isAdvancing } = toRefs(props)
+
+const progressPct = computed(() => {
+  if (totalQuestions.value === 0)
+    return 0
+
+  const progress = Math.round(((currentIndex.value + (isAdvancing.value ? 1 : 0)) / totalQuestions.value) * 100)
+
+  return Math.min(progress, 100)
+})
 </script>
 
 <template>
@@ -59,18 +70,14 @@ const emit = defineEmits<{
       <div class="order-3 lg:order-2 col-span-2 lg:col-span-3">
         <div class="flex flex-col gap-2 lg:max-w-2xl mx-auto">
           <UProgress
-            :model-value="totalQuestions === 0
-              ? 0
-              : Math.min(Math.round(((currentIndex + (isAdvancing ? 1 : 0)) / totalQuestions) * 100), 100)"
+            :model-value="progressPct"
           />
           <div class="inline-flex items-center justify-between text-sm">
             <span class="font-semibold">
               Flag {{ currentIndex + 1 }} of {{ totalQuestions }}
             </span>
             <span class="text-muted">
-              {{ totalQuestions === 0
-                ? 0
-                : Math.min(Math.round(((currentIndex + (isAdvancing ? 1 : 0)) / totalQuestions) * 100), 100) }} %
+              {{ progressPct }} %
             </span>
           </div>
         </div>
