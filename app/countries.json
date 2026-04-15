@@ -121,7 +121,7 @@
     "sovereignState": "",
     "cca2": "NU",
     "cca3": "NIU",
-    "independent": false,
+    "independent": true,
     "region": "Oceania",
     "subregion": "Polynesia",
     "area": 260,
@@ -789,7 +789,7 @@
       "alt": "The flag has a dark blue field. It features the flag of the United Kingdom — the Union Jack — in the canton, beneath which is a large white seven-pointed star. A representation of the Southern Cross constellation, made up of one small five-pointed and four larger seven-pointed white stars, is situated on the fly side of the field.",
       "emoji": "🇭🇲"
     },
-    "sovereignState": "",
+    "sovereignState": "AUS",
     "cca2": "HM",
     "cca3": "HMD",
     "independent": false,
@@ -1755,7 +1755,7 @@
       "alt": "The flag has a red field with a large white-edged navy blue cross that extends to the edges of the field. The vertical part of this cross is offset towards the hoist side.",
       "emoji": "🇸🇯"
     },
-    "sovereignState": "",
+    "sovereignState": "NOR",
     "cca2": "SJ",
     "cca3": "SJM",
     "independent": false,
@@ -1996,7 +1996,7 @@
       "alt": "The flag is composed of thirteen equal horizontal bands of red alternating with white. A blue rectangle, bearing fifty small five-pointed white stars arranged in nine rows where rows of six stars alternate with rows of five stars, is superimposed in the canton.",
       "emoji": "🇺🇲"
     },
-    "sovereignState": "",
+    "sovereignState": "USA",
     "cca2": "UM",
     "cca3": "UMI",
     "independent": false,
@@ -3909,7 +3909,7 @@
       "alt": "The flag is blue with a five-pointed white star on a gray latte stone (a traditional foundation stone) in the center, surrounded by a head lei (wreath).",
       "emoji": "🇲🇵"
     },
-    "sovereignState": "",
+    "sovereignState": "USA",
     "cca2": "MP",
     "cca3": "MNP",
     "independent": false,
@@ -4949,7 +4949,7 @@
       "alt": "The flag is composed of a white field with the national coat of arms in the center between the large blue initials V and I. The coat of arms shows a yellow eagle holding an olive branch in its right talon and three arrows in the left, with a shield of seven red and six white vertical stripes below a blue panel.",
       "emoji": "🇻🇮"
     },
-    "sovereignState": "",
+    "sovereignState": "USA",
     "cca2": "VI",
     "cca3": "VIR",
     "independent": false,
@@ -5008,7 +5008,7 @@
       "alt": "The flag features a large white triangle edged in red that is based on the fly side and extends to the hoist side and is charged with an eagle, all on a blue field.",
       "emoji": "🇦🇸"
     },
-    "sovereignState": "",
+    "sovereignState": "USA",
     "cca2": "AS",
     "cca3": "ASM",
     "independent": false,
@@ -5043,7 +5043,7 @@
     "sovereignState": "",
     "cca2": "CK",
     "cca3": "COK",
-    "independent": false,
+    "independent": true,
     "region": "Oceania",
     "subregion": "Polynesia",
     "area": 236,
