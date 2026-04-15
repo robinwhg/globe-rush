@@ -3,7 +3,6 @@ const props = defineProps<{
   countries: Country[]
   gameTitle: string
   regionTitle: string
-  regionSlug: string
 }>()
 
 const emit = defineEmits<{
