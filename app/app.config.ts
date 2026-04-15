@@ -14,6 +14,9 @@ export default defineAppConfig({
         variant: 'soft',
       },
     },
+    pageGrid: {
+      base: 'gap-4 sm:gap-8',
+    },
     icons: {
       arrowDown: 'i-tabler-arrow-down',
       arrowLeft: 'i-tabler-arrow-left',
