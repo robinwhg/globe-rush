@@ -113,7 +113,7 @@ function togglePause() {
         :game-title
         :region-title
         @retry="onRetry"
-        @review-wrong="onReviewWrongFlags"
+        @review="onReviewWrongFlags"
         @back="emit('back')"
       />
     </Transition>
