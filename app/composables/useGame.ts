@@ -11,10 +11,10 @@ export interface Choice {
 
 export type GameState = 'start' | 'play' | 'pause' | 'end'
 
-export function useGame(countries: Country[]) {
+export function useGame(gameCountries: Country[]) {
   const gameState = ref<GameState>('start')
   const isAdvancing = ref(false)
-  const questions = ref(shuffle(countries))
+  const questions = ref(shuffle(gameCountries))
   const index = ref(0)
   const wrongQuestions = ref<Country[]>([])
   const elapsedSeconds = ref(0)
@@ -39,27 +39,16 @@ export function useGame(countries: Country[]) {
       return []
 
     const currentQuestion = question.value
-    const maxDistractors = Math.max(0, Math.min(CHOICE_COUNT - 1, countries.length - 1))
-    const basePool = countries.filter(country => country.cca3 !== currentQuestion.cca3)
-
-    const distractorsBySubregion = currentQuestion.subregion
-      ? shuffle(basePool.filter(country => country.subregion === currentQuestion.subregion))
-      : []
-    const distractorsByRegion = shuffle(basePool.filter((country) => {
-      if (country.region !== currentQuestion.region)
-        return false
-
-      return !currentQuestion.subregion || country.subregion !== currentQuestion.subregion
-    }))
-
-    const distractorsFallback = shuffle(basePool.filter(country => country.region !== currentQuestion.region))
+    const requiredDistractors = CHOICE_COUNT - 1
+    const gamePool = gameCountries.filter(country => country.cca3 !== currentQuestion.cca3)
+    const globalPool = countries.filter(country => country.cca3 !== currentQuestion.cca3)
 
     const distractors: Country[] = []
-    const usedCountryCodes = new Set<string>()
+    const usedCountryCodes = new Set<string>([currentQuestion.cca3])
 
-    for (const pool of [distractorsBySubregion, distractorsByRegion, distractorsFallback]) {
-      for (const country of pool) {
-        if (distractors.length >= maxDistractors)
+    function addFromPool(pool: Country[]) {
+      for (const country of shuffle(pool)) {
+        if (distractors.length >= requiredDistractors)
           break
 
         if (usedCountryCodes.has(country.cca3))
@@ -68,17 +57,35 @@ export function useGame(countries: Country[]) {
         distractors.push(country)
         usedCountryCodes.add(country.cca3)
       }
-
-      if (distractors.length >= maxDistractors)
-        break
     }
 
-    const choicePool = shuffle([question.value, ...distractors])
+    if (currentQuestion.subregion)
+      addFromPool(gamePool.filter(country => country.subregion === currentQuestion.subregion))
+
+    addFromPool(gamePool.filter(country =>
+      country.region === currentQuestion.region
+      && (!currentQuestion.subregion || country.subregion !== currentQuestion.subregion),
+    ))
+
+    addFromPool(gamePool.filter(country => country.region !== currentQuestion.region))
+
+    if (currentQuestion.subregion)
+      addFromPool(globalPool.filter(country => country.subregion === currentQuestion.subregion))
+
+    addFromPool(globalPool.filter(country =>
+      country.region === currentQuestion.region
+      && (!currentQuestion.subregion || country.subregion !== currentQuestion.subregion),
+    ))
+
+    addFromPool(globalPool.filter(country => country.region !== currentQuestion.region))
+    addFromPool(globalPool)
+
+    const choicePool = shuffle([currentQuestion, ...distractors.slice(0, requiredDistractors)])
 
     return choicePool.map((choice) => {
       return {
         country: choice,
-        isCorrect: choice.cca3 === question.value?.cca3,
+        isCorrect: choice.cca3 === currentQuestion.cca3,
         showOverlay: ref(false),
       }
     })
@@ -106,7 +113,7 @@ export function useGame(countries: Country[]) {
   }
 
   function resetRun() {
-    questions.value = shuffle(countries)
+    questions.value = shuffle(gameCountries)
     index.value = 0
     wrongQuestions.value = []
     elapsedSeconds.value = 0

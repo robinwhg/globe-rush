@@ -262,6 +262,11 @@ export const playableRegions = [
         countries: getCountriesBySubregion('Central America'),
       },
       {
+        slug: 'countries-north-america',
+        title: 'Countries of North America',
+        countries: getCountriesBySubregion('North America'),
+      },
+      {
         slug: 'countries-south-america',
         title: 'Countries of South America',
         countries: getCountriesBySubregion('South America'),
