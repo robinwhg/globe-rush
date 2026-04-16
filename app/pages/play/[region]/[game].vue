@@ -57,6 +57,11 @@ function onBack() {
           :region-slug="currentRegion.slug"
           @back="onBack"
         />
+
+        <GameScoreboard
+          :region-slug="currentRegion.slug"
+          :game-slug="currentGame.slug"
+        />
       </ClientOnly>
     </UPageBody>
   </UPage>
