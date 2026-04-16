@@ -1,6 +1,6 @@
 {
-  "name": "Globe Rush",
-  "short_name": "Globe Rush",
+  "name": "Geo Rush",
+  "short_name": "Geo Rush",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,5 +15,7 @@
       "purpose": "maskable"
     }
   ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
   "display": "standalone"
 }

@@ -10,7 +10,7 @@ const items = computed(() => {
 <template>
   <UHeader toggle-side="right">
     <template #title>
-      <UIcon name="i-tabler-globe-filled" class="size-8 text-primary" />
+      <Logo aria-hidden="true" class="size-8 shrink-0 text-primary" />
       <span>Globe Rush</span>
     </template>
 
