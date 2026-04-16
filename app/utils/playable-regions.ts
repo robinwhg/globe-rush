@@ -13,6 +13,10 @@ function getAllTerritories(regionCountries: typeof countries) {
   return regionCountries.filter(country => !country.independent)
 }
 
+function getCountriesBySubregion(subregion: string) {
+  return countries.filter(country => country.independent && country.subregion === subregion)
+}
+
 const worldCountries = countries
 const africaCountries = countries.filter(country => country.region === 'Africa')
 const americasCountries = countries.filter(country => country.region === 'Americas')
@@ -93,6 +97,31 @@ export const playableRegions = [
         countries: getAllTerritories(africaCountries),
       },
       {
+        slug: 'countries-eastern-africa',
+        title: 'Countries of Eastern Africa',
+        countries: getCountriesBySubregion('Eastern Africa'),
+      },
+      {
+        slug: 'countries-middle-africa',
+        title: 'Countries of Middle Africa',
+        countries: getCountriesBySubregion('Middle Africa'),
+      },
+      {
+        slug: 'countries-northern-africa',
+        title: 'Countries of Northern Africa',
+        countries: getCountriesBySubregion('Northern Africa'),
+      },
+      {
+        slug: 'countries-southern-africa',
+        title: 'Countries of Southern Africa',
+        countries: getCountriesBySubregion('Southern Africa'),
+      },
+      {
+        slug: 'countries-western-africa',
+        title: 'Countries of Western Africa',
+        countries: getCountriesBySubregion('Western Africa'),
+      },
+      {
         slug: 'all-countries-and-territories',
         title: 'All countries and territories',
         countries: africaCountries,
@@ -127,6 +156,26 @@ export const playableRegions = [
         countries: getAllTerritories(americasCountries),
       },
       {
+        slug: 'countries-caribbean',
+        title: 'Countries of the Caribbean',
+        countries: getCountriesBySubregion('Caribbean'),
+      },
+      {
+        slug: 'countries-and-territories-caribbean',
+        title: 'Countries and territories of the Caribbean',
+        countries: countries.filter(country => country.subregion === 'Caribbean'),
+      },
+      {
+        slug: 'countries-central-america',
+        title: 'Countries of Central America',
+        countries: getCountriesBySubregion('Central America'),
+      },
+      {
+        slug: 'countries-south-america',
+        title: 'Countries of South America',
+        countries: getCountriesBySubregion('South America'),
+      },
+      {
         slug: 'all-countries-and-territories',
         title: 'All countries and territories',
         countries: americasCountries,
@@ -154,6 +203,18 @@ export const playableRegions = [
         slug: 'all-countries',
         title: 'All countries',
         countries: getAllCountries(asiaCountries),
+      },
+      {
+        slug: 'countries-eastern-and-south-eastern-asia',
+        title: 'Countries of Eastern and South-Eastern Asia',
+        countries: countries.filter(country =>
+          country.independent
+          && (country.subregion === 'Eastern Asia' || country.subregion === 'South-Eastern Asia')),
+      },
+      {
+        slug: 'countries-western-asia',
+        title: 'Countries of Western Asia',
+        countries: getCountriesBySubregion('Western Asia'),
       },
       {
         slug: 'all-countries-and-territories',
@@ -188,6 +249,27 @@ export const playableRegions = [
         slug: 'all-territories',
         title: 'All territories',
         countries: getAllTerritories(europeCountries),
+      },
+      {
+        slug: 'countries-eastern-and-southeast-europe',
+        title: 'Countries of Eastern and Southeast Europe',
+        countries: countries.filter(country =>
+          country.independent
+          && (country.subregion === 'Eastern Europe' || country.subregion === 'Southeast Europe')),
+      },
+      {
+        slug: 'countries-western-europe',
+        title: 'Countries of Western Europe',
+        countries: getCountriesBySubregion('Western Europe'),
+      },
+      {
+        slug: 'countries-western-central-and-southern-europe',
+        title: 'Countries of Western, Central and Southern Europe',
+        countries: countries.filter(country =>
+          country.independent
+          && (country.subregion === 'Western Europe'
+            || country.subregion === 'Central Europe'
+            || country.subregion === 'Southern Europe')),
       },
       {
         slug: 'all-countries-and-territories',
