@@ -1,8 +1,13 @@
 <script setup lang="ts">
+import type { TableColumn } from '@nuxt/ui'
+import { h, resolveComponent } from 'vue'
+
 const props = defineProps<{
   regionSlug: string
   gameSlug: string
 }>()
+
+const UButton = resolveComponent('UButton')
 
 const { regionSlug, gameSlug } = toRefs(props)
 const { getScoresForGame } = useScoreHistory()
@@ -11,10 +16,30 @@ const scores = computed(() => {
   return getScoresForGame(regionSlug.value, gameSlug.value)
 })
 
-const columns = [
+function getSortButton(column: any, label: string) {
+  const isSorted = column.getIsSorted()
+
+  return h(UButton, {
+    color: 'neutral',
+    variant: 'ghost',
+    label,
+    icon: isSorted
+      ? isSorted === 'asc'
+        ? 'i-tabler-sort-ascending'
+        : 'i-tabler-sort-descending'
+      : 'i-tabler-arrows-sort',
+    class: '-mx-2.5',
+    onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
+  })
+}
+
+const columns: TableColumn<any>[] = [
   {
     accessorKey: 'accuracy',
-    header: 'Accuracy',
+    header: ({ column }) => getSortButton(column, 'Accuracy'),
+    cell: ({ row }) => {
+      return `${row.getValue('accuracy')} %`
+    },
   },
   {
     accessorKey: 'score',
@@ -22,20 +47,27 @@ const columns = [
   },
   {
     accessorKey: 'time',
-    header: 'Time',
+    header: ({ column }) => getSortButton(column, 'Time'),
   },
   {
     accessorKey: 'date',
-    header: 'Date',
+    header: ({ column }) => getSortButton(column, 'Date'),
   },
 ]
 
-const tableRows = computed(() => {
+const sorting = ref([
+  {
+    id: 'date',
+    desc: false,
+  },
+])
+
+const data = computed(() => {
   return scores.value.map(score => ({
     id: score.id,
     date: formatLocalDateTime(score.createdAt),
     score: `${score.totalCorrectQuestions} / ${score.totalQuestions}`,
-    accuracy: `${calculateAccuracy(score.totalCorrectQuestions, score.totalQuestions)} %`,
+    accuracy: calculateAccuracy(score.totalCorrectQuestions, score.totalQuestions),
     time: formatDuration(score.elapsedSeconds),
   }))
 })
@@ -50,8 +82,9 @@ const tableRows = computed(() => {
     <Transition name="slide-up" mode="out-in" appear>
       <UCard :ui="{ root: 'max-w-2xl mx-auto', body: 'p-0 sm:p-0' }">
         <UTable
-          :data="tableRows"
-          :columns="columns"
+          v-model:sorting="sorting"
+          :data
+          :columns
           empty="No score yet."
         />
       </UCard>
