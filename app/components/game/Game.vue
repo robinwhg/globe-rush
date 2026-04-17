@@ -5,6 +5,7 @@ const props = defineProps<{
   regionTitle: string
   gameSlug: string
   regionSlug: string
+  gameMode: 'multiple-choice' | 'type-answer'
 }>()
 
 const emit = defineEmits<{
@@ -85,6 +86,7 @@ function togglePause() {
         :game-title
         :region-title
         :total-questions
+        :game-mode
         @start="onStartGame"
         @back="emit('back')"
       />
@@ -97,7 +99,7 @@ function togglePause() {
           :choices
           :is-advancing
           :show-overlay
-          mode="type-answer"
+          :game-mode
           @select-choice="choice => selectChoice(choice)"
           @submit-typed-answer="submitTypedAnswer"
         />

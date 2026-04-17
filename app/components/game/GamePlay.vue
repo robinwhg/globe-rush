@@ -4,7 +4,7 @@ const props = defineProps<{
   choices: Choice[]
   isAdvancing: boolean
   showOverlay: 'none' | 'success' | 'error'
-  mode: 'multiple-choice' | 'type-answer'
+  gameMode: 'multiple-choice' | 'type-answer'
 }>()
 
 const emit = defineEmits<{
@@ -14,7 +14,7 @@ const emit = defineEmits<{
 
 const typedAnswer = defineModel<string>('typedAnswer', { required: true })
 
-const { currentQuestion, choices, isAdvancing, showOverlay, mode } = toRefs(props)
+const { currentQuestion, choices, isAdvancing, showOverlay, gameMode } = toRefs(props)
 
 function onSubmitTypedAnswer() {
   emit('submitTypedAnswer')
@@ -40,7 +40,7 @@ function onSubmitTypedAnswer() {
 
     <template #actions>
       <UInput
-        v-if="mode === 'type-answer'"
+        v-if="gameMode === 'type-answer'"
         v-model="typedAnswer" size="xl" variant="soft" placeholder="Enter your answer here..." class="w-full"
         :class="{
           'choice-pop': showOverlay === 'success',

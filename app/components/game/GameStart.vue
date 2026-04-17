@@ -3,6 +3,7 @@ defineProps<{
   gameTitle: string
   regionTitle: string
   totalQuestions: number
+  gameMode: 'multiple-choice' | 'type-answer'
 }>()
 
 const emit = defineEmits<{
@@ -21,7 +22,8 @@ const emit = defineEmits<{
       <div class="overflow-y-auto grid grid-cols-2 gap-4">
         <UPageFeature :title="totalQuestions.toString()" description="Flags" icon="i-tabler-flag-filled" />
 
-        <UPageFeature title="Multiple Choice" description="Mode" icon="i-tabler-layout-grid-filled" />
+        <UPageFeature v-if="gameMode === 'type-answer'" title="Type Answer" description="Mode" icon="i-tabler-keyboard-filled" />
+        <UPageFeature v-else title="Multiple Choice" description="Mode" icon="i-tabler-layout-grid-filled" />
       </div>
     </template>
 
