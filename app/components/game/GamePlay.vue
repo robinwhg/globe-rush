@@ -1,14 +1,14 @@
 <script setup lang="ts">
 const props = defineProps<{
   currentQuestion: Country
-  choices: Choice[]
+  choices: GameChoice[]
   isAdvancing: boolean
   showOverlay: 'none' | 'success' | 'error'
   gameMode: GameMode
 }>()
 
 const emit = defineEmits<{
-  (e: 'selectChoice', choice: Choice): void
+  (e: 'selectChoice', choice: GameChoice): void
   (e: 'submitTypedAnswer'): void
 }>()
 

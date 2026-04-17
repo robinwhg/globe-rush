@@ -3,7 +3,7 @@ const ADVANCE_DELAY = 600
 const TIMER_TIMEOUT = 1000
 const MAX_ELAPSED_SECONDS = 90 * 60
 
-export interface Choice {
+export interface GameChoice {
   country: Country
   isCorrect: boolean
   selected: boolean
@@ -98,7 +98,7 @@ export function useGame(gameCountries: Country[]) {
     })
   })
 
-  function selectChoice(choice: Choice) {
+  function selectChoice(choice: GameChoice) {
     if (gameState.value !== 'play' || !currentQuestion.value || isAdvancing.value)
       return
 
