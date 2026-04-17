@@ -64,7 +64,10 @@
     "region": "Asia",
     "subregion": "Western Asia",
     "area": 438317,
-    "population": 38274618
+    "population": 38274618,
+    "altSpellings": [
+      "Jumhūriyyat al-‘Irāq"
+    ]
   },
   {
     "name": {
@@ -251,7 +254,10 @@
     "region": "Europe",
     "subregion": "Central Europe",
     "area": 83879,
-    "population": 9110079
+    "population": 9110079,
+    "altSpellings": [
+      "Oesterreich"
+    ]
   },
   {
     "name": {
@@ -277,7 +283,11 @@
     "region": "Asia",
     "subregion": "South-Eastern Asia",
     "area": 676578,
-    "population": 55770232
+    "population": 55770232,
+    "altSpellings": [
+      "Burma",
+      "Pyidaunzu Thanmăda Myăma Nainngandaw"
+    ]
   },
   {
     "name": {
@@ -303,7 +313,11 @@
     "region": "Europe",
     "subregion": "Northern Europe",
     "area": 103000,
-    "population": 364260
+    "population": 364260,
+    "altSpellings": [
+      "Republic of Iceland",
+      "Lýðveldið Ísland"
+    ]
   },
   {
     "name": {
@@ -329,7 +343,10 @@
     "region": "Europe",
     "subregion": "Eastern Europe",
     "area": 603550,
-    "population": 32862000
+    "population": 32862000,
+    "altSpellings": [
+      "Ukrayina"
+    ]
   },
   {
     "name": {
@@ -355,7 +372,10 @@
     "region": "Asia",
     "subregion": "Western Asia",
     "area": 309500,
-    "population": 5494691
+    "population": 5494691,
+    "altSpellings": [
+      "Salṭanat ʻUmān"
+    ]
   },
   {
     "name": {
@@ -422,7 +442,10 @@
     "region": "Americas",
     "subregion": "Caribbean",
     "area": 444,
-    "population": 152849
+    "population": 152849,
+    "altSpellings": [
+      "Kòrsou"
+    ]
   },
   {
     "name": {
@@ -484,7 +507,10 @@
     "region": "Africa",
     "subregion": "Northern Africa",
     "area": 446550,
-    "population": 37493183
+    "population": 37493183,
+    "altSpellings": [
+      "Al-Mamlakah al-Maġribiyah"
+    ]
   },
   {
     "name": {
@@ -598,7 +624,11 @@
     "region": "Asia",
     "subregion": "Western Asia",
     "area": 6220,
-    "population": 5483450
+    "population": 5483450,
+    "altSpellings": [
+      "Palestine, State of",
+      "Dawlat Filasṭin"
+    ]
   },
   {
     "name": {
@@ -687,7 +717,12 @@
     "subregion": "Caribbean",
     "area": 53,
     "population": 31496,
-    "hint": "Territory"
+    "hint": "Territory",
+    "altSpellings": [
+      "Collectivity of Saint Martin",
+      "Collectivité de Saint-Martin",
+      "Saint Martin (French part)"
+    ]
   },
   {
     "name": {
@@ -718,7 +753,11 @@
     "region": "Europe",
     "subregion": "Southern Europe",
     "area": 9251,
-    "population": 1344976
+    "population": 1344976,
+    "altSpellings": [
+      "Kýpros",
+      "Κυπριακή Δημοκρατία"
+    ]
   },
   {
     "name": {
@@ -744,7 +783,10 @@
     "region": "Europe",
     "subregion": "Northern Europe",
     "area": 65300,
-    "population": 2897430
+    "population": 2897430,
+    "altSpellings": [
+      "Lietuvos Respublika"
+    ]
   },
   {
     "name": {
@@ -797,7 +839,11 @@
     "region": "Oceania",
     "subregion": "Polynesia",
     "area": 47,
-    "population": 35
+    "population": 35,
+    "altSpellings": [
+      "Pitcairn",
+      "Pitcairn Henderson Ducie and Oeno Islands"
+    ]
   },
   {
     "name": {
@@ -849,7 +895,11 @@
     "region": "Europe",
     "subregion": "Southeast Europe",
     "area": 238391,
-    "population": 19043151
+    "population": 19043151,
+    "altSpellings": [
+      "Rumania",
+      "Roumania"
+    ]
   },
   {
     "name": {
@@ -880,7 +930,13 @@
     "region": "Africa",
     "subregion": "Southern Africa",
     "area": 17364,
-    "population": 1236126
+    "population": 1236126,
+    "altSpellings": [
+      "Swaziland",
+      "weSwatini",
+      "Swatini",
+      "Ngwane"
+    ]
   },
   {
     "name": {
@@ -906,7 +962,10 @@
     "region": "Americas",
     "subregion": "Caribbean",
     "area": 1628,
-    "population": 378561
+    "population": 378561,
+    "altSpellings": [
+      "Gwadloup"
+    ]
   },
   {
     "name": {
@@ -1004,7 +1063,11 @@
     "region": "Asia",
     "subregion": "Western Asia",
     "area": 83600,
-    "population": 11027129
+    "population": 11027129,
+    "altSpellings": [
+      "UAE",
+      "Emirates"
+    ]
   },
   {
     "name": {
@@ -1030,7 +1093,10 @@
     "region": "Oceania",
     "subregion": "Polynesia",
     "area": 4167,
-    "population": 279500
+    "population": 279500,
+    "altSpellings": [
+      "Pōrīnetia Farāni"
+    ]
   },
   {
     "name": {
@@ -1082,7 +1148,11 @@
     "region": "Asia",
     "subregion": "Southern Asia",
     "area": 1648195,
-    "population": 92417681
+    "population": 92417681,
+    "altSpellings": [
+      "Iran, Islamic Republic of",
+      "Jomhuri-ye Eslāmi-ye Irān"
+    ]
   },
   {
     "name": {
@@ -1108,7 +1178,10 @@
     "region": "Asia",
     "subregion": "Western Asia",
     "area": 17818,
-    "population": 4985716
+    "population": 4985716,
+    "altSpellings": [
+      "Dawlat al-Kuwait"
+    ]
   },
   {
     "name": {
@@ -1170,7 +1243,10 @@
     "region": "Americas",
     "subregion": "Caribbean",
     "area": 34,
-    "population": 58477
+    "population": 58477,
+    "altSpellings": [
+      "Sint Maarten (Dutch part)"
+    ]
   },
   {
     "name": {
@@ -1222,7 +1298,11 @@
     "region": "Oceania",
     "subregion": "Australia and New Zealand",
     "area": 14,
-    "population": 593
+    "population": 593,
+    "altSpellings": [
+      "Keeling Islands",
+      "Cocos Islands"
+    ]
   },
   {
     "name": {
@@ -1274,7 +1354,11 @@
     "region": "Americas",
     "subregion": "South America",
     "area": 12173,
-    "population": 4550
+    "population": 4550,
+    "altSpellings": [
+      "Islas Malvinas",
+      "Falkland Islands (Malvinas)"
+    ]
   },
   {
     "name": {
@@ -1326,7 +1410,10 @@
     "region": "Europe",
     "subregion": "Southern Europe",
     "area": 131990,
-    "population": 10372335
+    "population": 10372335,
+    "altSpellings": [
+      "Elláda"
+    ]
   },
   {
     "name": {
@@ -1414,7 +1501,11 @@
     "region": "Americas",
     "subregion": "North America",
     "area": 9525067,
-    "population": 341784857
+    "population": 341784857,
+    "altSpellings": [
+      "US",
+      "USA"
+    ]
   },
   {
     "name": {
@@ -1440,7 +1531,10 @@
     "region": "Americas",
     "subregion": "Caribbean",
     "area": 151,
-    "population": 30030
+    "population": 30030,
+    "altSpellings": [
+      "Virgin Islands, British"
+    ]
   },
   {
     "name": {
@@ -1471,7 +1565,10 @@
     "region": "Asia",
     "subregion": "Western Asia",
     "area": 21937,
-    "population": 10147200
+    "population": 10147200,
+    "altSpellings": [
+      "Medīnat Yisrā'el"
+    ]
   },
   {
     "name": {
@@ -1502,7 +1599,10 @@
     "region": "Asia",
     "subregion": "Southern Asia",
     "area": 65610,
-    "population": 23300000
+    "population": 23300000,
+    "altSpellings": [
+      "ilaṅkai"
+    ]
   },
   {
     "name": {
@@ -1580,7 +1680,10 @@
     "region": "Americas",
     "subregion": "North America",
     "area": 2166086,
-    "population": 56831
+    "population": 56831,
+    "altSpellings": [
+      "Grønland"
+    ]
   },
   {
     "name": {
@@ -1611,7 +1714,13 @@
     "region": "Africa",
     "subregion": "Eastern Africa",
     "area": 23200,
-    "population": 1152944
+    "population": 1152944,
+    "altSpellings": [
+      "Jabuuti",
+      "Gabuuti",
+      "Gabuutih Ummuuno",
+      "Jamhuuriyadda Jabuuti"
+    ]
   },
   {
     "name": {
@@ -1642,7 +1751,10 @@
     "region": "Asia",
     "subregion": "Western Asia",
     "area": 10452,
-    "population": 5364482
+    "population": 5364482,
+    "altSpellings": [
+      "Al-Jumhūrīyah Al-Libnānīyah"
+    ]
   },
   {
     "name": {
@@ -1678,7 +1790,11 @@
     "region": "Africa",
     "subregion": "Middle Africa",
     "area": 342000,
-    "population": 6228784
+    "population": 6228784,
+    "altSpellings": [
+      "Congo",
+      "Congo-Brazzaville"
+    ]
   },
   {
     "name": {
@@ -1705,7 +1821,10 @@
     "subregion": "Northern Europe",
     "area": 61399,
     "population": 2530,
-    "hint": "Territory Northern Europe"
+    "hint": "Territory Northern Europe",
+    "altSpellings": [
+      "Svalbard and Jan Mayen Islands"
+    ]
   },
   {
     "name": {
@@ -1736,7 +1855,10 @@
     "region": "Africa",
     "subregion": "Northern Africa",
     "area": 1886068,
-    "population": 51767437
+    "population": 51767437,
+    "altSpellings": [
+      "Jumhūrīyat as-Sūdān"
+    ]
   },
   {
     "name": {
@@ -1788,7 +1910,10 @@
     "region": "Africa",
     "subregion": "Middle Africa",
     "area": 1246700,
-    "population": 36749906
+    "population": 36749906,
+    "altSpellings": [
+      "ʁɛpublika de an'ɡɔla"
+    ]
   },
   {
     "name": {
@@ -1819,7 +1944,12 @@
     "region": "Asia",
     "subregion": "Central Asia",
     "area": 2724900,
-    "population": 20495975
+    "population": 20495975,
+    "altSpellings": [
+      "Qazaqstan",
+      "Qazaqstan Respublïkası",
+      "Respublika Kazakhstan"
+    ]
   },
   {
     "name": {
@@ -1912,7 +2042,10 @@
     "region": "Africa",
     "subregion": "Middle Africa",
     "area": 28051,
-    "population": 1795834
+    "population": 1795834,
+    "altSpellings": [
+      "République de Guinée équatoriale"
+    ]
   },
   {
     "name": {
@@ -2093,7 +2226,11 @@
     "region": "Africa",
     "subregion": "Southern Africa",
     "area": 1221037,
-    "population": 63015904
+    "population": 63015904,
+    "altSpellings": [
+      "RSA",
+      "Suid-Afrika"
+    ]
   },
   {
     "name": {
@@ -2124,7 +2261,12 @@
     "region": "Europe",
     "subregion": "Eastern Europe",
     "area": 207600,
-    "population": 9109280
+    "population": 9109280,
+    "altSpellings": [
+      "Bielaruś",
+      "Белоруссия",
+      "Республика Белоруссия"
+    ]
   },
   {
     "name": {
@@ -2176,7 +2318,11 @@
     "region": "Asia",
     "subregion": "Southern Asia",
     "area": 300,
-    "population": 601269
+    "population": 601269,
+    "altSpellings": [
+      "Maldive Islands",
+      "Dhivehi Raajjeyge Jumhooriyya"
+    ]
   },
   {
     "name": {
@@ -2207,7 +2353,11 @@
     "region": "Africa",
     "subregion": "Eastern Africa",
     "area": 637657,
-    "population": 19280850
+    "population": 19280850,
+    "altSpellings": [
+      "aṣ-Ṣūmāl",
+      "Jumhūriyyat aṣ-Ṣūmāl al-Fiderāliyya"
+    ]
   },
   {
     "name": {
@@ -2233,7 +2383,10 @@
     "region": "Asia",
     "subregion": "Western Asia",
     "area": 89342,
-    "population": 11484805
+    "population": 11484805,
+    "altSpellings": [
+      "al-Mamlakah al-Urdunīyah al-Hāshimīyah"
+    ]
   },
   {
     "name": {
@@ -2373,7 +2526,10 @@
     "region": "Europe",
     "subregion": "Northern Europe",
     "area": 64559,
-    "population": 1842226
+    "population": 1842226,
+    "altSpellings": [
+      "Latvijas Republika"
+    ]
   },
   {
     "name": {
@@ -2404,7 +2560,11 @@
     "region": "Asia",
     "subregion": "Central Asia",
     "area": 143100,
-    "population": 10786734
+    "population": 10786734,
+    "altSpellings": [
+      "Toçikiston",
+      "Çumhuriyi Toçikiston"
+    ]
   },
   {
     "name": {
@@ -2445,7 +2605,10 @@
     "region": "Americas",
     "subregion": "South America",
     "area": 1098581,
-    "population": 11365333
+    "population": 11365333,
+    "altSpellings": [
+      "Bolivia, Plurinational State of"
+    ]
   },
   {
     "name": {
@@ -2476,7 +2639,11 @@
     "region": "Europe",
     "subregion": "Northern Europe",
     "area": 572,
-    "population": 84530
+    "population": 84530,
+    "altSpellings": [
+      "Ellan Vannin",
+      "Mann"
+    ]
   },
   {
     "name": {
@@ -2507,7 +2674,12 @@
     "region": "Oceania",
     "subregion": "Micronesia",
     "area": 21,
-    "population": 11919
+    "population": 11919,
+    "altSpellings": [
+      "Naoero",
+      "Pleasant Island",
+      "Ripublik Naoero"
+    ]
   },
   {
     "name": {
@@ -2590,7 +2762,10 @@
     "region": "Americas",
     "subregion": "Caribbean",
     "area": 322,
-    "population": 31980
+    "population": 31980,
+    "altSpellings": [
+      "BES islands"
+    ]
   },
   {
     "name": {
@@ -2722,7 +2897,10 @@
     "region": "Asia",
     "subregion": "Southern Asia",
     "area": 652230,
-    "population": 50000000
+    "population": 50000000,
+    "altSpellings": [
+      "Afġānistān"
+    ]
   },
   {
     "name": {
@@ -2774,7 +2952,10 @@
     "region": "Africa",
     "subregion": "Eastern Africa",
     "area": 1104300,
-    "population": 135500000
+    "population": 135500000,
+    "altSpellings": [
+      "ʾĪtyōṗṗyā"
+    ]
   },
   {
     "name": {
@@ -2800,7 +2981,11 @@
     "region": "Americas",
     "subregion": "South America",
     "area": 163820,
-    "population": 632638
+    "population": 632638,
+    "altSpellings": [
+      "Sarnam",
+      "Sranangron"
+    ]
   },
   {
     "name": {
@@ -2857,7 +3042,10 @@
     "region": "Africa",
     "subregion": "Middle Africa",
     "area": 964,
-    "population": 220372
+    "population": 220372,
+    "altSpellings": [
+      "República Democrática de São Tomé e Príncipe"
+    ]
   },
   {
     "name": {
@@ -2883,7 +3071,10 @@
     "region": "Africa",
     "subregion": "Western Africa",
     "area": 1267000,
-    "population": 26342784
+    "population": 26342784,
+    "altSpellings": [
+      "Nijar"
+    ]
   },
   {
     "name": {
@@ -3002,7 +3193,11 @@
     "region": "Oceania",
     "subregion": "Melanesia",
     "area": 18272,
-    "population": 926276
+    "population": 926276,
+    "altSpellings": [
+      "Matanitu ko Viti",
+      "Fijī Gaṇarājya"
+    ]
   },
   {
     "name": {
@@ -3028,7 +3223,10 @@
     "region": "Asia",
     "subregion": "Western Asia",
     "area": 69700,
-    "population": 3717100
+    "population": 3717100,
+    "altSpellings": [
+      "Sakartvelo"
+    ]
   },
   {
     "name": {
@@ -3059,7 +3257,10 @@
     "region": "Africa",
     "subregion": "Eastern Africa",
     "area": 580367,
-    "population": 53330978
+    "population": 53330978,
+    "altSpellings": [
+      "Jamhuri ya Kenya"
+    ]
   },
   {
     "name": {
@@ -3121,7 +3322,11 @@
     "region": "Africa",
     "subregion": "Northern Africa",
     "area": 2381741,
-    "population": 47400000
+    "population": 47400000,
+    "altSpellings": [
+      "Dzayer",
+      "Algérie"
+    ]
   },
   {
     "name": {
@@ -3147,7 +3352,10 @@
     "region": "Oceania",
     "subregion": "Micronesia",
     "area": 702,
-    "population": 104468
+    "population": 104468,
+    "altSpellings": [
+      "Micronesia, Federated States of"
+    ]
   },
   {
     "name": {
@@ -3199,7 +3407,11 @@
     "region": "Asia",
     "subregion": "Western Asia",
     "area": 2149690,
-    "population": 33000000
+    "population": 33000000,
+    "altSpellings": [
+      "Saudi",
+      "Al-Mamlakah al-‘Arabiyyah as-Su‘ūdiyyah"
+    ]
   },
   {
     "name": {
@@ -3256,7 +3468,10 @@
     "region": "Africa",
     "subregion": "Eastern Africa",
     "area": 947303,
-    "population": 67462121
+    "population": 67462121,
+    "altSpellings": [
+      "Tanzania, United Republic of"
+    ]
   },
   {
     "name": {
@@ -3287,7 +3502,10 @@
     "region": "Europe",
     "subregion": "Southern Europe",
     "area": 0.49,
-    "population": 882
+    "population": 882,
+    "altSpellings": [
+      "Holy See (Vatican City State)"
+    ]
   },
   {
     "name": {
@@ -3318,7 +3536,10 @@
     "region": "Africa",
     "subregion": "Southern Africa",
     "area": 30355,
-    "population": 2210646
+    "population": 2210646,
+    "altSpellings": [
+      "Muso oa Lesotho"
+    ]
   },
   {
     "name": {
@@ -3344,7 +3565,11 @@
     "region": "Europe",
     "subregion": "Western Europe",
     "area": 41865,
-    "population": 17100715
+    "population": 17100715,
+    "altSpellings": [
+      "Holland",
+      "The Netherlands"
+    ]
   },
   {
     "name": {
@@ -3416,7 +3641,12 @@
     "region": "Africa",
     "subregion": "Middle Africa",
     "area": 2344858,
-    "population": 114388160
+    "population": 114388160,
+    "altSpellings": [
+      "Congo-Kinshasa",
+      "Congo, the Democratic Republic of the",
+      "DRC"
+    ]
   },
   {
     "name": {
@@ -3468,7 +3698,10 @@
     "region": "Europe",
     "subregion": "Southern Europe",
     "area": 92090,
-    "population": 10749635
+    "population": 10749635,
+    "altSpellings": [
+      "Portuguesa"
+    ]
   },
   {
     "name": {
@@ -3494,7 +3727,12 @@
     "region": "Americas",
     "subregion": "North America",
     "area": 53.2,
-    "population": 63913
+    "population": 63913,
+    "altSpellings": [
+      "The Islands of Bermuda",
+      "The Bermudas",
+      "Somers Isles"
+    ]
   },
   {
     "name": {
@@ -3546,7 +3784,10 @@
     "region": "Asia",
     "subregion": "Western Asia",
     "area": 185180,
-    "population": 26019711
+    "population": 26019711,
+    "altSpellings": [
+      "Al-Jumhūrīyah Al-ʻArabīyah As-Sūrīyah"
+    ]
   },
   {
     "name": {
@@ -3598,7 +3839,10 @@
     "region": "Asia",
     "subregion": "Southern Asia",
     "area": 148460,
-    "population": 173562364
+    "population": 173562364,
+    "altSpellings": [
+      "Gônôprôjatôntri Bangladesh"
+    ]
   },
   {
     "name": {
@@ -3629,7 +3873,10 @@
     "region": "Americas",
     "subregion": "South America",
     "area": 406752,
-    "population": 6413627
+    "population": 6413627,
+    "altSpellings": [
+      "República del Paraguay"
+    ]
   },
   {
     "name": {
@@ -3660,7 +3907,10 @@
     "region": "Asia",
     "subregion": "Central Asia",
     "area": 447400,
-    "population": 38236704
+    "population": 38236704,
+    "altSpellings": [
+      "Ўзбекистон Республикаси"
+    ]
   },
   {
     "name": {
@@ -3819,7 +4069,11 @@
     "region": "Africa",
     "subregion": "Western Africa",
     "area": 394,
-    "population": 5633
+    "population": 5633,
+    "altSpellings": [
+      "Saint Helena",
+      "St. Helena, Ascension and Tristan da Cunha"
+    ]
   },
   {
     "name": {
@@ -3907,7 +4161,12 @@
     "region": "Asia",
     "subregion": "Eastern Asia",
     "area": 36197,
-    "population": 23299132
+    "population": 23299132,
+    "altSpellings": [
+      "Republic of China",
+      "Zhōnghuá Mínguó",
+      "Chinese Taipei"
+    ]
   },
   {
     "name": {
@@ -4005,7 +4264,11 @@
     "region": "Europe",
     "subregion": "Southeast Europe",
     "area": 77589,
-    "population": 6567783
+    "population": 6567783,
+    "altSpellings": [
+      "Srbija",
+      "Republika Srbija"
+    ]
   },
   {
     "name": {
@@ -4062,7 +4325,11 @@
     "region": "Asia",
     "subregion": "Eastern Asia",
     "area": 30,
-    "population": 712651
+    "population": 712651,
+    "altSpellings": [
+      "Macao",
+      "中華人民共和國澳門特別行政區"
+    ]
   },
   {
     "name": {
@@ -4176,7 +4443,10 @@
     "region": "Africa",
     "subregion": "Northern Africa",
     "area": 266000,
-    "population": 600904
+    "population": 600904,
+    "altSpellings": [
+      "Taneẓroft Tutrimt"
+    ]
   },
   {
     "name": {
@@ -4238,7 +4508,12 @@
     "region": "Africa",
     "subregion": "Eastern Africa",
     "area": 117600,
-    "population": 5000000
+    "population": 5000000,
+    "altSpellings": [
+      "Dawlat Iritriyá",
+      "ʾErtrā",
+      "Iritriyā"
+    ]
   },
   {
     "name": {
@@ -4274,7 +4549,11 @@
     "region": "Asia",
     "subregion": "Southern Asia",
     "area": 3287263,
-    "population": 1428627663
+    "population": 1428627663,
+    "altSpellings": [
+      "Bhārat",
+      "Bharat Ganrajya"
+    ]
   },
   {
     "name": {
@@ -4300,7 +4579,12 @@
     "region": "Asia",
     "subregion": "Eastern Asia",
     "area": 100210,
-    "population": 52081799
+    "population": 52081799,
+    "altSpellings": [
+      "Korea, Republic of",
+      "남한",
+      "남조선"
+    ]
   },
   {
     "name": {
@@ -4435,7 +4719,10 @@
     "region": "Africa",
     "subregion": "Eastern Africa",
     "area": 241550,
-    "population": 47123531
+    "population": 47123531,
+    "altSpellings": [
+      "Jamhuri ya Uganda"
+    ]
   },
   {
     "name": {
@@ -4539,7 +4826,11 @@
     "region": "Europe",
     "subregion": "Southeast Europe",
     "area": 28748,
-    "population": 2402113
+    "population": 2402113,
+    "altSpellings": [
+      "Shqipëri",
+      "Shqipnia"
+    ]
   },
   {
     "name": {
@@ -4591,7 +4882,10 @@
     "region": "Asia",
     "subregion": "Western Asia",
     "area": 11586,
-    "population": 3173024
+    "population": 3173024,
+    "altSpellings": [
+      "Dawlat Qaṭar"
+    ]
   },
   {
     "name": {
@@ -4798,7 +5092,10 @@
     "region": "Americas",
     "subregion": "Caribbean",
     "area": 347,
-    "population": 87146
+    "population": 87146,
+    "altSpellings": [
+      "Virgin Islands, U.S."
+    ]
   },
   {
     "name": {
@@ -4824,7 +5121,10 @@
     "region": "Asia",
     "subregion": "Southern Asia",
     "area": 147181,
-    "population": 31122387
+    "population": 31122387,
+    "altSpellings": [
+      "Loktāntrik Ganatantra Nepāl"
+    ]
   },
   {
     "name": {
@@ -4855,7 +5155,11 @@
     "region": "Oceania",
     "subregion": "Polynesia",
     "area": 199,
-    "population": 43268
+    "population": 43268,
+    "altSpellings": [
+      "Amerika Sāmoa",
+      "Amelika Sāmoa"
+    ]
   },
   {
     "name": {
@@ -4917,7 +5221,11 @@
     "region": "Asia",
     "subregion": "South-Eastern Asia",
     "area": 14874,
-    "population": 1354662
+    "population": 1354662,
+    "altSpellings": [
+      "East Timor",
+      "Timór Lorosa'e"
+    ]
   },
   {
     "name": {
@@ -4943,7 +5251,12 @@
     "region": "Asia",
     "subregion": "South-Eastern Asia",
     "area": 5765,
-    "population": 466227
+    "population": 466227,
+    "altSpellings": [
+      "Brunei Darussalam",
+      "Nation of Brunei",
+      "the Abode of Peace"
+    ]
   },
   {
     "name": {
@@ -4995,7 +5308,10 @@
     "region": "Antarctic",
     "subregion": "",
     "area": 439666,
-    "population": 400
+    "population": 400,
+    "altSpellings": [
+      "French Southern Territories"
+    ]
   },
   {
     "name": {
@@ -5109,7 +5425,10 @@
     "region": "Africa",
     "subregion": "Western Africa",
     "area": 56785,
-    "population": 9583381
+    "population": 9583381,
+    "altSpellings": [
+      "Togolese"
+    ]
   },
   {
     "name": {
@@ -5140,7 +5459,10 @@
     "region": "Oceania",
     "subregion": "Micronesia",
     "area": 811,
-    "population": 116545
+    "population": 116545,
+    "altSpellings": [
+      "Republic of Kiribati"
+    ]
   },
   {
     "name": {
@@ -5202,7 +5524,10 @@
     "region": "Asia",
     "subregion": "South-Eastern Asia",
     "area": 342353,
-    "population": 112729484
+    "population": 112729484,
+    "altSpellings": [
+      "Repúblika ng Pilipinas"
+    ]
   },
   {
     "name": {
@@ -5228,7 +5553,11 @@
     "region": "Asia",
     "subregion": "Western Asia",
     "area": 527968,
-    "population": 32684503
+    "population": 32684503,
+    "altSpellings": [
+      "Yemeni Republic",
+      "al-Jumhūriyyah al-Yamaniyyah"
+    ]
   },
   {
     "name": {
@@ -5280,7 +5609,11 @@
     "region": "Asia",
     "subregion": "Eastern Asia",
     "area": 377930,
-    "population": 122950000
+    "population": 122950000,
+    "altSpellings": [
+      "Nippon",
+      "Nihon"
+    ]
   },
   {
     "name": {
@@ -5513,7 +5846,11 @@
     "region": "Africa",
     "subregion": "Northern Africa",
     "area": 163610,
-    "population": 11565204
+    "population": 11565204,
+    "altSpellings": [
+      "Republic of Tunisia",
+      "al-Jumhūriyyah at-Tūnisiyyah"
+    ]
   },
   {
     "name": {
@@ -5601,7 +5938,11 @@
     "region": "Europe",
     "subregion": "Northern Europe",
     "area": 244376,
-    "population": 67326569
+    "population": 67326569,
+    "altSpellings": [
+      "UK",
+      "Great Britain"
+    ]
   },
   {
     "name": {
@@ -5673,7 +6014,10 @@
     "region": "Africa",
     "subregion": "Eastern Africa",
     "area": 26338,
-    "population": 14104969
+    "population": 14104969,
+    "altSpellings": [
+      "République du Rwanda"
+    ]
   },
   {
     "name": {
@@ -5699,7 +6043,11 @@
     "region": "Asia",
     "subregion": "South-Eastern Asia",
     "area": 236800,
-    "population": 7953556
+    "population": 7953556,
+    "altSpellings": [
+      "Lao",
+      "Sathalanalat Paxathipatai Paxaxon Lao"
+    ]
   },
   {
     "name": {
@@ -5787,7 +6135,10 @@
     "region": "Asia",
     "subregion": "Southern Asia",
     "area": 796095,
-    "population": 223773700
+    "population": 223773700,
+    "altSpellings": [
+      "Islāmī Jumhūriya'eh Pākistān"
+    ]
   },
   {
     "name": {
@@ -5907,7 +6258,11 @@
     "region": "Europe",
     "subregion": "Southeast Europe",
     "area": 25713,
-    "population": 1836713
+    "population": 1836713,
+    "altSpellings": [
+      "The former Yugoslav Republic of Macedonia",
+      "Macedonia, The Former Yugoslav Republic of"
+    ]
   },
   {
     "name": {
@@ -6026,7 +6381,10 @@
     "region": "Asia",
     "subregion": "Western Asia",
     "area": 786.8,
-    "population": 1463265
+    "population": 1463265,
+    "altSpellings": [
+      "Mamlakat al-Baḥrayn"
+    ]
   },
   {
     "name": {
@@ -6140,7 +6498,10 @@
     "region": "Asia",
     "subregion": "Central Asia",
     "area": 199951,
-    "population": 7300000
+    "population": 7300000,
+    "altSpellings": [
+      "Kyrgyz Respublikasy"
+    ]
   },
   {
     "name": {
@@ -6166,7 +6527,12 @@
     "region": "Asia",
     "subregion": "South-Eastern Asia",
     "area": 513120,
-    "population": 65975198
+    "population": 65975198,
+    "altSpellings": [
+      "Prathet",
+      "Thai",
+      "Ratcha Anachak Thai"
+    ]
   },
   {
     "name": {
@@ -6192,7 +6558,10 @@
     "region": "Americas",
     "subregion": "North America",
     "area": 1964375,
-    "population": 131946900
+    "population": 131946900,
+    "altSpellings": [
+      "Mexicanos"
+    ]
   },
   {
     "name": {
@@ -6218,7 +6587,10 @@
     "region": "Europe",
     "subregion": "Southeast Europe",
     "area": 13812,
-    "population": 623327
+    "population": 623327,
+    "altSpellings": [
+      "Crna Gora"
+    ]
   },
   {
     "name": {
@@ -6280,7 +6652,10 @@
     "region": "Africa",
     "subregion": "Northern Africa",
     "area": 1759540,
-    "population": 7361263
+    "population": 7361263,
+    "altSpellings": [
+      "Dawlat Libya"
+    ]
   },
   {
     "name": {
@@ -6430,7 +6805,10 @@
     "region": "Americas",
     "subregion": "Caribbean",
     "area": 21,
-    "population": 10562
+    "population": 10562,
+    "altSpellings": [
+      "St. Barthelemy"
+    ]
   },
   {
     "name": {
@@ -6456,7 +6834,14 @@
     "region": "Asia",
     "subregion": "Eastern Asia",
     "area": 120538,
-    "population": 26298666
+    "population": 26298666,
+    "altSpellings": [
+      "DPRK",
+      "Chosŏn Minjujuŭi Inmin Konghwaguk",
+      "Korea, Democratic People's Republic of",
+      "북한",
+      "북조선"
+    ]
   },
   {
     "name": {
@@ -6508,7 +6893,10 @@
     "region": "Africa",
     "subregion": "Western Africa",
     "area": 1030700,
-    "population": 4328040
+    "population": 4328040,
+    "altSpellings": [
+      "al-Jumhūriyyah al-ʾIslāmiyyah al-Mūrītāniyyah"
+    ]
   },
   {
     "name": {
@@ -6721,7 +7109,10 @@
     "region": "Americas",
     "subregion": "South America",
     "area": 916445,
-    "population": 31800000
+    "population": 31800000,
+    "altSpellings": [
+      "Venezuela, Bolivarian Republic of"
+    ]
   },
   {
     "name": {
@@ -6747,7 +7138,11 @@
     "region": "Americas",
     "subregion": "Caribbean",
     "area": 751,
-    "population": 74656
+    "population": 74656,
+    "altSpellings": [
+      "Dominique",
+      "Wai‘tu kubuli"
+    ]
   },
   {
     "name": {
@@ -6809,7 +7204,11 @@
     "region": "Africa",
     "subregion": "Western Africa",
     "area": 923768,
-    "population": 236747130
+    "population": 236747130,
+    "altSpellings": [
+      "Nijeriya",
+      "Naíjíríà"
+    ]
   },
   {
     "name": {
@@ -6835,7 +7234,10 @@
     "region": "Asia",
     "subregion": "Western Asia",
     "area": 29743,
-    "population": 3081100
+    "population": 3081100,
+    "altSpellings": [
+      "Hayastan"
+    ]
   },
   {
     "name": {
@@ -6871,7 +7273,10 @@
     "region": "Europe",
     "subregion": "Southeast Europe",
     "area": 51209,
-    "population": 2904256
+    "population": 2904256,
+    "altSpellings": [
+      "Bosnia-Herzegovina"
+    ]
   },
   {
     "name": {
@@ -6897,7 +7302,11 @@
     "region": "Europe",
     "subregion": "Northern Europe",
     "area": 1580,
-    "population": 30654
+    "population": 30654,
+    "altSpellings": [
+      "Aaland",
+      "Ahvenanmaa"
+    ]
   },
   {
     "name": {
@@ -6975,7 +7384,12 @@
     "region": "Asia",
     "subregion": "Eastern Asia",
     "area": 9706961,
-    "population": 1404890000
+    "population": 1404890000,
+    "altSpellings": [
+      "Zhōngguó",
+      "Zhonghua",
+      "Zhōnghuá Rénmín Gònghéguó"
+    ]
   },
   {
     "name": {
@@ -7063,7 +7477,10 @@
     "region": "Africa",
     "subregion": "Eastern Africa",
     "area": 1862,
-    "population": 883075
+    "population": 883075,
+    "altSpellings": [
+      "al-Ittiḥād al-Qumurī"
+    ]
   },
   {
     "name": {
@@ -7172,7 +7589,10 @@
     "region": "Europe",
     "subregion": "Eastern Europe",
     "area": 33847,
-    "population": 2381325
+    "population": 2381325,
+    "altSpellings": [
+      "Moldova, Republic of"
+    ]
   },
   {
     "name": {
@@ -7222,7 +7642,10 @@
     "region": "Oceania",
     "subregion": "Micronesia",
     "area": 181,
-    "population": 53127
+    "population": 53127,
+    "altSpellings": [
+      "Aolepān Aorōkin M̧ajeļ"
+    ]
   },
   {
     "name": {
