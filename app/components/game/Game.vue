@@ -9,15 +9,15 @@ const emit = defineEmits<{
 
 const { config } = toRefs(props)
 
-const { gameState, choices, retry, selectChoice, typedAnswer, submitTypedAnswer, totalCorrectQuestions, totalQuestions, index, currentQuestion, isAdvancing, showOverlay, timerLabel, elapsedSeconds, startGame, pauseGame, resumeGame, stopToStart, reviewWrongFlags } = useGame(config.value.game.countries)
+const game = useGame(config.value.game.countries)
 const { saveScore } = useScoreHistory()
 const isReviewRun = ref(false)
 
-watch(gameState, (state, previousState) => {
+watch(game.gameState, (state, previousState) => {
   if (state !== 'end' || previousState === 'end' || isReviewRun.value)
     return
 
-  if (!totalQuestions.value)
+  if (!game.totalQuestions.value)
     return
 
   saveScore({
@@ -27,92 +27,92 @@ watch(gameState, (state, previousState) => {
     regionTitle: config.value.region.title,
     gameSlug: config.value.game.slug,
     gameTitle: config.value.game.title,
-    totalQuestions: totalQuestions.value,
-    totalCorrectQuestions: totalCorrectQuestions.value,
-    elapsedSeconds: elapsedSeconds.value,
+    totalQuestions: game.totalQuestions.value,
+    totalCorrectQuestions: game.totalCorrectQuestions.value,
+    elapsedSeconds: game.elapsedSeconds.value,
     gameMode: config.value.game.mode,
   })
 })
 
 function onStartGame() {
   isReviewRun.value = false
-  startGame()
+  game.startGame()
 }
 
 function onRetry() {
   isReviewRun.value = false
-  retry()
+  game.retry()
 }
 
 function onStopToStart() {
   isReviewRun.value = false
-  stopToStart()
+  game.stopToStart()
 }
 
 function onReviewWrongFlags() {
   isReviewRun.value = true
-  reviewWrongFlags()
+  game.reviewWrongFlags()
 }
 
 function togglePause() {
-  if (gameState.value === 'play') {
-    pauseGame()
+  if (game.gameState.value === 'play') {
+    game.pauseGame()
     return
   }
 
-  if (gameState.value === 'pause')
-    resumeGame()
+  if (game.gameState.value === 'pause')
+    game.resumeGame()
 }
 </script>
 
 <template>
   <div class="space-y-4">
     <GameHeader
-      :current-index="index"
-      :total-questions
-      :timer-label="timerLabel"
-      :is-advancing="isAdvancing"
-      :game-state="gameState"
+      :current-index="game.index.value"
+      :total-questions="game.totalQuestions.value"
+      :timer-label="game.timerLabel.value"
+      :is-advancing="game.isAdvancing.value"
+      :game-state="game.gameState.value"
       @toggle-pause="togglePause"
     />
 
     <Transition name="fade" mode="out-in">
       <GameStart
-        v-if="gameState === 'start'"
+        v-if="game.gameState.value === 'start'"
         :game-title="config.game.title"
         :region-title="config.region.title"
-        :total-questions
+        :total-questions="game.totalQuestions.value"
         :game-mode="config.game.mode"
         @start="onStartGame"
         @back="emit('back')"
       />
 
-      <div v-else-if="gameState === 'play'" class="space-y-4">
+      <div v-else-if="game.gameState.value === 'play'" class="space-y-4">
         <GamePlay
-          v-if="currentQuestion"
-          v-model:typed-answer="typedAnswer"
-          :current-question
-          :choices
-          :is-advancing
-          :show-overlay
+          v-if="game.currentQuestion.value"
+          v-model:typed-answer="game.typedAnswer.value"
+          :current-question="game.currentQuestion.value"
+          :choices="game.choices.value"
+          :is-advancing="game.isAdvancing.value"
+          :show-overlay="game.showOverlay.value"
           :game-mode="config.game.mode"
-          @select-choice="choice => selectChoice(choice)"
-          @submit-typed-answer="submitTypedAnswer"
+          @select-choice="choice => game.selectChoice(choice)"
+          @submit-typed-answer="game.submitTypedAnswer"
         />
       </div>
 
-      <div v-else-if="gameState === 'pause'" class="space-y-4">
+      <div v-else-if="game.gameState.value === 'pause'" class="space-y-4">
         <GamePause
-          @resume="resumeGame"
+          @resume="game.resumeGame"
           @exit="onStopToStart"
         />
       </div>
 
       <GameEnd
         v-else
-        :total-questions
-        :total-correct-questions
-        :timer-label
+        :total-questions="game.totalQuestions.value"
+        :total-correct-questions="game.totalCorrectQuestions.value"
+        :timer-label="game.timerLabel.value"
         :game-title="config.game.title"
         :region-title="config.region.title"
         @retry="onRetry"
