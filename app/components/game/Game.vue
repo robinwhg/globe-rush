@@ -13,7 +13,7 @@ const emit = defineEmits<{
 
 const { countries, gameTitle, regionTitle, gameSlug, regionSlug } = toRefs(props)
 
-const { gameState, choices, retry, selectChoice, totalCorrectQuestions, totalQuestions, index, question, isAdvancing, timerLabel, elapsedSeconds, startGame, pauseGame, resumeGame, stopToStart, reviewWrongFlags } = useGame(countries.value)
+const { gameState, choices, retry, selectChoice, totalCorrectQuestions, totalQuestions, index, question, isAdvancing, showOverlay, timerLabel, elapsedSeconds, startGame, pauseGame, resumeGame, stopToStart, reviewWrongFlags } = useGame(countries.value)
 const { saveScore } = useScoreHistory()
 const isReviewRun = ref(false)
 
@@ -94,6 +94,7 @@ function togglePause() {
           :question="question!"
           :choices="choices"
           :is-advancing="isAdvancing"
+          :show-overlay="showOverlay"
           @select-choice="choice => selectChoice(choice)"
         />
       </div>

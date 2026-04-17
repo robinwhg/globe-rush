@@ -6,7 +6,7 @@ const MAX_ELAPSED_SECONDS = 90 * 60
 export interface Choice {
   country: Country
   isCorrect: boolean
-  showOverlay: Ref<boolean>
+  selected: boolean
 }
 
 export type GameState = 'start' | 'play' | 'pause' | 'end'
@@ -14,6 +14,7 @@ export type GameState = 'start' | 'play' | 'pause' | 'end'
 export function useGame(gameCountries: Country[]) {
   const gameState = ref<GameState>('start')
   const isAdvancing = ref(false)
+  const showOverlay = ref(false)
   const questions = ref(shuffle(gameCountries))
   const index = ref(0)
   const wrongQuestions = ref<Country[]>([])
@@ -76,7 +77,7 @@ export function useGame(gameCountries: Country[]) {
       return {
         country: choice,
         isCorrect: choice.cca3 === currentQuestion.cca3,
-        showOverlay: ref(false),
+        selected: false,
       }
     })
   })
@@ -90,11 +91,12 @@ export function useGame(gameCountries: Country[]) {
     if (!choice.isCorrect)
       wrongQuestions.value.push(question.value)
 
-    choice.showOverlay.value = true
+    choice.selected = true
+    showOverlay.value = true
 
     setTimeout(() => {
       index.value += 1
-      choice.showOverlay.value = false
+      showOverlay.value = false
       isAdvancing.value = false
 
       if (index.value >= questions.value.length)
@@ -108,6 +110,7 @@ export function useGame(gameCountries: Country[]) {
     wrongQuestions.value = []
     elapsedSeconds.value = 0
     isAdvancing.value = false
+    showOverlay.value = false
   }
 
   function startGame() {
@@ -142,6 +145,7 @@ export function useGame(gameCountries: Country[]) {
     wrongQuestions.value = []
     elapsedSeconds.value = 0
     isAdvancing.value = false
+    showOverlay.value = false
     gameState.value = 'play'
   }
 
@@ -167,6 +171,7 @@ export function useGame(gameCountries: Country[]) {
   return {
     gameState,
     isAdvancing,
+    showOverlay,
     questions,
     index,
     wrongQuestions,

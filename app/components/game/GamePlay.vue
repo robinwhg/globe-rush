@@ -3,13 +3,14 @@ const props = defineProps<{
   question: Country
   choices: Choice[]
   isAdvancing: boolean
+  showOverlay: boolean
 }>()
 
 const emit = defineEmits<{
   (e: 'selectChoice', choice: Choice): void
 }>()
 
-const { question, choices, isAdvancing } = toRefs(props)
+const { question, choices, isAdvancing, showOverlay } = toRefs(props)
 </script>
 
 <template>
@@ -34,8 +35,8 @@ const { question, choices, isAdvancing } = toRefs(props)
         <div
           v-for="choice in choices" :key="choice.country.cca3" class="relative"
           :class="{
-            'choice-wiggle': choice.showOverlay.value && !choice.isCorrect,
-            'choice-pop': choice.showOverlay.value && choice.isCorrect,
+            'choice-wiggle': showOverlay && choice.selected && !choice.isCorrect,
+            'choice-pop': showOverlay && choice.selected && choice.isCorrect,
           }"
         >
           <BaseCardButton
@@ -46,7 +47,7 @@ const { question, choices, isAdvancing } = toRefs(props)
 
           <Transition name="fade" mode="out-in">
             <div
-              v-if="choice.showOverlay.value"
+              v-if="showOverlay && choice.selected"
               class="absolute inset-0 z-10 flex items-center justify-center rounded-lg text-inverted pointer-events-none"
               :class="choice.isCorrect ? 'bg-success' : 'bg-error'"
             >
