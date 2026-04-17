@@ -5,7 +5,7 @@ const props = defineProps<{
   regionTitle: string
   gameSlug: string
   regionSlug: string
-  gameMode: 'multiple-choice' | 'type-answer'
+  gameMode: GameMode
 }>()
 
 const emit = defineEmits<{

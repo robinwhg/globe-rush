@@ -3,7 +3,7 @@ defineProps<{
   gameTitle: string
   regionTitle: string
   totalQuestions: number
-  gameMode: 'multiple-choice' | 'type-answer'
+  gameMode: GameMode
 }>()
 
 const emit = defineEmits<{

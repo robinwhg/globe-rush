@@ -29,11 +29,11 @@ const regionCountries = computed(() => {
   return countries.filter(country => country.region.toLowerCase() === currentRegion.slug)
 })
 
-const gameMode = ref<'multiple-choice' | 'type-answer'>('multiple-choice')
+const gameMode = ref<GameMode>('multiple-choice')
 
 const { getScoresForGame } = useScoreHistory()
 
-function getBestScore(gameSlug: string, gameMode: 'multiple-choice' | 'type-answer') {
+function getBestScore(gameSlug: string, gameMode: GameMode) {
   if (!currentRegion)
     return null
 
@@ -87,9 +87,11 @@ function getBestScore(gameSlug: string, gameMode: 'multiple-choice' | 'type-answ
                 </p>
               </template>
 
-              <span v-if="getBestScore(game.slug, gameMode) !== null" class="text-xl font-semibold text-muted">
-                {{ getBestScore(game.slug, gameMode) }} %
-              </span>
+              <ClientOnly>
+                <span v-if="getBestScore(game.slug, gameMode) !== null" class="text-xl font-semibold text-muted text-right">
+                  {{ getBestScore(game.slug, gameMode) }} %
+                </span>
+              </ClientOnly>
             </UPageCard>
           </UPageGrid>
         </div>

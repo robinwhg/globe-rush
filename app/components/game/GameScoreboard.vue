@@ -5,7 +5,7 @@ import { h, resolveComponent } from 'vue'
 const props = defineProps<{
   regionSlug: string
   gameSlug: string
-  gameMode: 'multiple-choice' | 'type-answer'
+  gameMode: GameMode
 }>()
 
 const UButton = resolveComponent('UButton')

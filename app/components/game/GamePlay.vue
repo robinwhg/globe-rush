@@ -4,7 +4,7 @@ const props = defineProps<{
   choices: Choice[]
   isAdvancing: boolean
   showOverlay: 'none' | 'success' | 'error'
-  gameMode: 'multiple-choice' | 'type-answer'
+  gameMode: GameMode
 }>()
 
 const emit = defineEmits<{

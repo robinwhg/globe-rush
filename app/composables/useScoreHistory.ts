@@ -5,7 +5,7 @@ export interface ScoreRecord {
   regionTitle: string
   gameSlug: string
   gameTitle: string
-  gameMode: 'multiple-choice' | 'type-answer'
+  gameMode: GameMode
   totalQuestions: number
   totalCorrectQuestions: number
   elapsedSeconds: number
@@ -37,7 +37,7 @@ export function useScoreHistory() {
     return scores.value ?? []
   }
 
-  function getScoresForGame(regionSlug: string, gameSlug: string, gameMode: 'multiple-choice' | 'type-answer') {
+  function getScoresForGame(regionSlug: string, gameSlug: string, gameMode: GameMode) {
     return getScores().filter(score => score.regionSlug === regionSlug && score.gameSlug === gameSlug && score.gameMode === gameMode)
   }
 

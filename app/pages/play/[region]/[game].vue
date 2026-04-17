@@ -2,7 +2,7 @@
 const route = useRoute()
 const region = String(route.params.region ?? '').toLowerCase()
 const game = String(route.params.game ?? '').toLowerCase()
-const gameMode = useRouteQuery<'multiple-choice' | 'type-answer'>('mode', 'multiple-choice')
+const gameMode = useRouteQuery<GameMode>('mode', 'multiple-choice')
 
 const currentRegion = playableRegions.find(playableRegion => playableRegion.slug === region)
 

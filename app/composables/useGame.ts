@@ -9,6 +9,8 @@ export interface Choice {
   selected: boolean
 }
 
+export type GameMode = 'multiple-choice' | 'type-answer'
+
 export type GameState = 'start' | 'play' | 'pause' | 'end'
 
 export function useGame(gameCountries: Country[]) {
