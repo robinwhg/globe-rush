@@ -1,23 +1,13 @@
 <script setup lang="ts">
-const props = defineProps<{
-  currentQuestion: Country
-  choices: GameChoice[]
-  isAdvancing: boolean
-  showOverlay: 'none' | 'success' | 'error'
-  gameMode: GameMode
+const { game, config } = defineProps<{
+  game: GameRuntime
+  config: GameConfig
 }>()
 
-const emit = defineEmits<{
-  (e: 'selectChoice', choice: GameChoice): void
-  (e: 'submitTypedAnswer'): void
-}>()
-
-const typedAnswer = defineModel<string>('typedAnswer', { required: true })
-
-const { currentQuestion, choices, isAdvancing, showOverlay, gameMode } = toRefs(props)
+const currentQuestion = computed(() => game.currentQuestion.value!)
 
 function onSubmitTypedAnswer() {
-  emit('submitTypedAnswer')
+  game.submitTypedAnswer()
 }
 </script>
 
@@ -40,29 +30,34 @@ function onSubmitTypedAnswer() {
 
     <template #actions>
       <UInput
-        v-if="gameMode === 'type-answer'"
-        v-model="typedAnswer" size="xl" variant="soft" placeholder="Enter your answer here..." class="w-full"
+        v-if="config.game.mode === 'type-answer'"
+        :model-value="game.typedAnswer.value"
+        size="xl"
+        variant="soft"
+        placeholder="Enter your answer here..."
+        class="w-full"
         :class="{
-          'choice-pop': showOverlay === 'success',
-          'choice-wiggle': showOverlay === 'error',
+          'choice-pop': game.showOverlay.value === 'success',
+          'choice-wiggle': game.showOverlay.value === 'error',
         }"
         :ui="{ base:
-          showOverlay === 'success' ? 'text-success bg-success/25 hover:bg-success/25 focus:bg-success/25 disabled:bg-success/25 px-4 py-4'
-          : showOverlay === 'error' ? 'text-error bg-error/25 hover:bg-error/25 focus:bg-error/25 disabled:bg-error/25 px-4 py-4'
+          game.showOverlay.value === 'success' ? 'text-success bg-success/25 hover:bg-success/25 focus:bg-success/25 disabled:bg-success/25 px-4 py-4'
+          : game.showOverlay.value === 'error' ? 'text-error bg-error/25 hover:bg-error/25 focus:bg-error/25 disabled:bg-error/25 px-4 py-4'
             : 'px-4 py-4',
         }"
+        @update:model-value="value => game.setTypedAnswer(String(value ?? ''))"
         @keyup.enter="onSubmitTypedAnswer"
       >
         <template #trailing>
           <UButton
-            :disabled="!typedAnswer.length"
+            :disabled="!game.typedAnswer.value.length"
             color="neutral"
             variant="link"
             icon="i-tabler-arrow-forward"
             aria-label="Clear input"
             :ui="{ leadingIcon:
-              showOverlay === 'success' ? 'text-success'
-              : showOverlay === 'error' ? 'text-error'
+              game.showOverlay.value === 'success' ? 'text-success'
+              : game.showOverlay.value === 'error' ? 'text-error'
                 : '',
             }"
             @click="onSubmitTypedAnswer"
@@ -72,29 +67,29 @@ function onSubmitTypedAnswer() {
 
       <div v-else :key="`choices-${currentQuestion.cca3}`" class="grid grid-cols-2 items-stretch gap-4">
         <div
-          v-for="choice in choices" :key="choice.country.cca3" class="relative"
+          v-for="choice in game.choices.value" :key="choice.country.cca3" class="relative"
           :class="{
-            'choice-pop': showOverlay === 'success' && choice.selected,
-            'choice-wiggle': showOverlay === 'error' && choice.selected,
+            'choice-pop': game.showOverlay.value === 'success' && choice.selected,
+            'choice-wiggle': game.showOverlay.value === 'error' && choice.selected,
           }"
         >
           <BaseCardButton
-            :disabled="isAdvancing"
+            :disabled="game.isAdvancing.value"
             :label="choice.country.name.common"
-            @click="emit('selectChoice', choice)"
+            @click="game.selectChoice(choice)"
           />
 
           <Transition name="fade" mode="out-in">
             <div
-              v-if="showOverlay !== 'none' && choice.selected"
+              v-if="game.showOverlay.value !== 'none' && choice.selected"
               class="absolute inset-0 z-10 flex items-center justify-center rounded-lg text-inverted pointer-events-none"
               :class="choice.isCorrect ? 'bg-success' : 'bg-error'"
             >
               <UIcon
                 class="size-10"
                 :name="
-                  showOverlay === 'success' ? 'i-tabler-check'
-                  : showOverlay === 'error' ? 'i-tabler-x'
+                  game.showOverlay.value === 'success' ? 'i-tabler-check'
+                  : game.showOverlay.value === 'error' ? 'i-tabler-x'
                     : ''
                 "
               />

@@ -9,9 +9,29 @@ const emit = defineEmits<{
 
 const { config } = toRefs(props)
 
-const game = useGame(config.value.game.countries)
+const baseGame = useGame(config.value.game.countries)
 const { saveScore } = useScoreHistory()
 const isReviewRun = ref(false)
+
+const game: GameRuntime = {
+  ...baseGame,
+  startGame: () => {
+    isReviewRun.value = false
+    baseGame.startGame()
+  },
+  retry: () => {
+    isReviewRun.value = false
+    baseGame.retry()
+  },
+  stopToStart: () => {
+    isReviewRun.value = false
+    baseGame.stopToStart()
+  },
+  reviewWrongFlags: () => {
+    isReviewRun.value = true
+    baseGame.reviewWrongFlags()
+  },
+}
 
 watch(game.gameState, (state, previousState) => {
   if (state !== 'end' || previousState === 'end' || isReviewRun.value)
@@ -33,90 +53,36 @@ watch(game.gameState, (state, previousState) => {
     gameMode: config.value.game.mode,
   })
 })
-
-function onStartGame() {
-  isReviewRun.value = false
-  game.startGame()
-}
-
-function onRetry() {
-  isReviewRun.value = false
-  game.retry()
-}
-
-function onStopToStart() {
-  isReviewRun.value = false
-  game.stopToStart()
-}
-
-function onReviewWrongFlags() {
-  isReviewRun.value = true
-  game.reviewWrongFlags()
-}
-
-function onTogglePause() {
-  if (game.gameState.value === 'play') {
-    game.pauseGame()
-    return
-  }
-
-  if (game.gameState.value === 'pause')
-    game.resumeGame()
-}
 </script>
 
 <template>
   <div class="space-y-4">
-    <GameHeader
-      :current-index="game.index.value"
-      :total-questions="game.totalQuestions.value"
-      :timer-label="game.timerLabel.value"
-      :is-advancing="game.isAdvancing.value"
-      :game-state="game.gameState.value"
-      @toggle-pause="onTogglePause"
-    />
+    <GameHeader :game />
 
     <Transition name="fade" mode="out-in">
       <GameStart
         v-if="game.gameState.value === 'start'"
-        :game-title="config.game.title"
-        :region-title="config.region.title"
-        :total-questions="game.totalQuestions.value"
-        :game-mode="config.game.mode"
-        @start="onStartGame"
+        :game
+        :config
         @back="emit('back')"
       />
 
       <div v-else-if="game.gameState.value === 'play'" class="space-y-4">
         <GamePlay
           v-if="game.currentQuestion.value"
-          v-model:typed-answer="game.typedAnswer.value"
-          :current-question="game.currentQuestion.value"
-          :choices="game.choices.value"
-          :is-advancing="game.isAdvancing.value"
-          :show-overlay="game.showOverlay.value"
-          :game-mode="config.game.mode"
-          @select-choice="choice => game.selectChoice(choice)"
-          @submit-typed-answer="game.submitTypedAnswer"
+          :game
+          :config
         />
       </div>
 
       <div v-else-if="game.gameState.value === 'pause'" class="space-y-4">
-        <GamePause
-          @resume="game.resumeGame"
-          @exit="onStopToStart"
-        />
+        <GamePause :game />
       </div>
 
       <GameEnd
         v-else
-        :total-questions="game.totalQuestions.value"
-        :total-correct-questions="game.totalCorrectQuestions.value"
-        :timer-label="game.timerLabel.value"
-        :game-title="config.game.title"
-        :region-title="config.region.title"
-        @retry="onRetry"
-        @review="onReviewWrongFlags"
+        :game
+        :config
         @back="emit('back')"
       />
     </Transition>

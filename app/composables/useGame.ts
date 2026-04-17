@@ -151,6 +151,10 @@ export function useGame(gameCountries: Country[]) {
     }, ADVANCE_DELAY)
   }
 
+  function setTypedAnswer(value: string) {
+    typedAnswer.value = value
+  }
+
   function resetRun() {
     questions.value = shuffle(gameCountries)
     index.value = 0
@@ -240,8 +244,11 @@ export function useGame(gameCountries: Country[]) {
     reviewWrongFlags,
     retry,
     typedAnswer,
+    setTypedAnswer,
   }
 }
+
+export type GameRuntime = ReturnType<typeof useGame>
 
 function shuffle<T>(array: T[]): T[] {
   const shuffled = [...array]
