@@ -113,7 +113,7 @@ export function useGame(gameCountries: Country[]) {
     completeRunIfFinished()
   }
 
-  function selectChoice(choice: GameChoice) {
+  function submitSelectedChoice(choice: GameChoice) {
     if (gameState.value !== 'play' || !currentQuestion.value || isAdvancing.value)
       return
 
@@ -241,7 +241,7 @@ export function useGame(gameCountries: Country[]) {
     startGame,
     pauseGame,
     resumeGame,
-    selectChoice,
+    submitSelectedChoice,
     submitTypedAnswer,
     proceedToNextQuestion,
     stopToStart,

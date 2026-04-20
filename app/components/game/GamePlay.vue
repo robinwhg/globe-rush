@@ -34,7 +34,7 @@ function onSubmitTypedAnswer() {
 }
 
 function onSelectChoice(choice: GameChoice) {
-  game.selectChoice(choice)
+  game.submitSelectedChoice(choice)
 
   if (game.isAdvancing.value)
     scheduleProceedToNextQuestion()
