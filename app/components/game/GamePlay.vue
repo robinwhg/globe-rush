@@ -4,6 +4,10 @@ const { game, config } = defineProps<{
   config: GameConfig
 }>()
 
+const emit = defineEmits<{
+  (e: 'proceed'): void
+}>()
+
 const ANSWER_FEEDBACK_DELAY = 600
 const currentQuestion = computed(() => game.currentQuestion.value!)
 const typedAnswer = ref('')
@@ -24,7 +28,8 @@ function scheduleProceedToNextQuestion() {
 
   proceedTimeout.value = setTimeout(() => {
     proceedTimeout.value = null
-    game.proceedToNextQuestion()
+    emit('proceed')
+
     feedback.value = 'none'
     isSubmitting.value = false
   }, ANSWER_FEEDBACK_DELAY)
@@ -70,17 +75,22 @@ watch(() => currentQuestion.value.cca3, () => {
 </script>
 
 <template>
-  <GameStateLayout :content-key="currentQuestion.cca3">
+  <GameStateLayout
+    :content-key="`${currentQuestion.cca3}-question`"
+    fixed-card
+  >
     <template #content>
-      <div class="h-52 lg:h-80 flex flex-col gap-2">
-        <GameImage
-          :key="currentQuestion.cca3"
-          :src="currentQuestion.flag.svg"
-          :alt="currentQuestion.flag.alt"
-          class="min-h-0"
-        />
+      <div class="h-full flex flex-col gap-2">
+        <div class="flex-1 min-h-0 flex items-center justify-center">
+          <GameImage
+            :key="currentQuestion.cca3"
+            :src="currentQuestion.flag.svg"
+            :alt="currentQuestion.flag.alt"
+            class="h-full w-full"
+          />
+        </div>
 
-        <p v-if="currentQuestion.hint" class="text-muted">
+        <p v-if="currentQuestion.hint" class="shrink-0 text-muted">
           Hint: {{ currentQuestion.hint }}
         </p>
       </div>

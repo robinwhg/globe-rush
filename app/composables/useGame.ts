@@ -32,6 +32,7 @@ export type GameState = 'start' | 'play' | 'pause' | 'end'
 
 export function useGame(gameCountries: Country[]) {
   const gameState = ref<GameState>('start')
+  const isTimerPaused = ref(false)
   const questions = ref(shuffle(gameCountries))
   const index = ref(0)
   const wrongQuestions = ref<Country[]>([])
@@ -151,6 +152,7 @@ export function useGame(gameCountries: Country[]) {
     index.value = 0
     wrongQuestions.value = []
     elapsedSeconds.value = 0
+    isTimerPaused.value = false
   }
 
   function startGame() {
@@ -192,8 +194,12 @@ export function useGame(gameCountries: Country[]) {
     gameState.value = 'start'
   }
 
+  function setTimerPaused(paused: boolean) {
+    isTimerPaused.value = paused
+  }
+
   const timer = setInterval(() => {
-    if (gameState.value !== 'play')
+    if (gameState.value !== 'play' || isTimerPaused.value)
       return
 
     elapsedSeconds.value += 1
@@ -224,6 +230,7 @@ export function useGame(gameCountries: Country[]) {
     submitSelectedChoice,
     submitTypedAnswer,
     proceedToNextQuestion,
+    setTimerPaused,
     stopToStart,
     reviewWrongFlags,
     retry,
