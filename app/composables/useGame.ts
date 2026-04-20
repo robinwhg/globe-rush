@@ -13,12 +13,15 @@ export interface GameChoice {
 
 export type GameMode = 'multiple-choice' | 'type-answer'
 
+export type GameDifficulty = 'practice' | 'test'
+
 export interface GameConfig {
   game: {
     slug: string
     title: string
     countries: Country[]
     mode: GameMode
+    difficulty: GameDifficulty
   }
   region: {
     slug: string

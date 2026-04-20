@@ -21,6 +21,19 @@ const emit = defineEmits<{
 
         <UPageFeature v-if="config.game.mode === 'type-answer'" title="Type Answer" description="Mode" icon="i-tabler-keyboard-filled" />
         <UPageFeature v-else title="Multiple Choice" description="Mode" icon="i-tabler-layout-grid-filled" />
+
+        <UPageFeature
+          v-if="config.game.difficulty === 'practice'"
+          title="Practice"
+          description="Difficulty"
+          icon="i-tabler-school"
+        />
+        <UPageFeature
+          v-else
+          title="Test"
+          description="Difficulty"
+          icon="i-tabler-target-arrow"
+        />
       </div>
     </template>
 
