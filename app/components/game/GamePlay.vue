@@ -7,6 +7,7 @@ const { game, config } = defineProps<{
 const ANSWER_FEEDBACK_DELAY = 600
 const currentQuestion = computed(() => game.currentQuestion.value!)
 const typedAnswer = ref('')
+const feedback = ref<'none' | 'success' | 'error'>('none')
 const proceedTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
 
 function clearProceedTimeout() {
@@ -23,21 +24,28 @@ function scheduleProceedToNextQuestion() {
   proceedTimeout.value = setTimeout(() => {
     proceedTimeout.value = null
     game.proceedToNextQuestion()
+    feedback.value = 'none'
   }, ANSWER_FEEDBACK_DELAY)
 }
 
 function onSubmitTypedAnswer() {
-  game.submitTypedAnswer(typedAnswer.value)
+  const isCorrect = game.submitTypedAnswer(typedAnswer.value)
 
-  if (game.isAdvancing.value)
-    scheduleProceedToNextQuestion()
+  if (isCorrect === null)
+    return
+
+  feedback.value = isCorrect ? 'success' : 'error'
+  scheduleProceedToNextQuestion()
 }
 
 function onSelectChoice(choice: GameChoice) {
-  game.submitSelectedChoice(choice)
+  const isCorrect = game.submitSelectedChoice(choice)
 
-  if (game.isAdvancing.value)
-    scheduleProceedToNextQuestion()
+  if (isCorrect === null)
+    return
+
+  feedback.value = isCorrect ? 'success' : 'error'
+  scheduleProceedToNextQuestion()
 }
 
 onScopeDispose(() => {
@@ -46,6 +54,7 @@ onScopeDispose(() => {
 
 watch(() => currentQuestion.value.cca3, () => {
   typedAnswer.value = ''
+  feedback.value = 'none'
 })
 </script>
 
@@ -75,26 +84,26 @@ watch(() => currentQuestion.value.cca3, () => {
         placeholder="Enter your answer here..."
         class="w-full"
         :class="{
-          'choice-pop': game.showOverlay.value === 'success',
-          'choice-wiggle': game.showOverlay.value === 'error',
+          'choice-pop': feedback === 'success',
+          'choice-wiggle': feedback === 'error',
         }"
         :ui="{ base:
-          game.showOverlay.value === 'success' ? 'text-success bg-success/25 hover:bg-success/25 focus:bg-success/25 disabled:bg-success/25 px-4 py-4'
-          : game.showOverlay.value === 'error' ? 'text-error bg-error/25 hover:bg-error/25 focus:bg-error/25 disabled:bg-error/25 px-4 py-4'
+          feedback === 'success' ? 'text-success bg-success/25 hover:bg-success/25 focus:bg-success/25 disabled:bg-success/25 px-4 py-4'
+          : feedback === 'error' ? 'text-error bg-error/25 hover:bg-error/25 focus:bg-error/25 disabled:bg-error/25 px-4 py-4'
             : 'px-4 py-4',
         }"
         @keyup.enter="onSubmitTypedAnswer"
       >
         <template #trailing>
           <UButton
-            :disabled="!typedAnswer.length"
+            :disabled="!typedAnswer.length || game.isAdvancing.value"
             color="neutral"
             variant="link"
             icon="i-tabler-arrow-forward"
             aria-label="Clear input"
             :ui="{ leadingIcon:
-              game.showOverlay.value === 'success' ? 'text-success'
-              : game.showOverlay.value === 'error' ? 'text-error'
+              feedback === 'success' ? 'text-success'
+              : feedback === 'error' ? 'text-error'
                 : '',
             }"
             @click="onSubmitTypedAnswer"
@@ -106,8 +115,8 @@ watch(() => currentQuestion.value.cca3, () => {
         <div
           v-for="choice in game.choices.value" :key="choice.country.cca3" class="relative"
           :class="{
-            'choice-pop': game.showOverlay.value === 'success' && choice.selected,
-            'choice-wiggle': game.showOverlay.value === 'error' && choice.selected,
+            'choice-pop': feedback === 'success' && choice.selected,
+            'choice-wiggle': feedback === 'error' && choice.selected,
           }"
         >
           <BaseCardButton
@@ -118,15 +127,15 @@ watch(() => currentQuestion.value.cca3, () => {
 
           <Transition name="fade" mode="out-in">
             <div
-              v-if="game.showOverlay.value !== 'none' && choice.selected"
+              v-if="feedback !== 'none' && choice.selected"
               class="absolute inset-0 z-10 flex items-center justify-center rounded-lg text-inverted pointer-events-none"
               :class="choice.isCorrect ? 'bg-success' : 'bg-error'"
             >
               <UIcon
                 class="size-10"
                 :name="
-                  game.showOverlay.value === 'success' ? 'i-tabler-check'
-                  : game.showOverlay.value === 'error' ? 'i-tabler-x'
+                  feedback === 'success' ? 'i-tabler-check'
+                  : feedback === 'error' ? 'i-tabler-x'
                     : ''
                 "
               />

@@ -33,7 +33,6 @@ export type GameState = 'start' | 'play' | 'pause' | 'end'
 export function useGame(gameCountries: Country[]) {
   const gameState = ref<GameState>('start')
   const isAdvancing = ref(false)
-  const showOverlay = ref<'none' | 'success' | 'error'>('none')
   const questions = ref(shuffle(gameCountries))
   const index = ref(0)
   const wrongQuestions = ref<Country[]>([])
@@ -108,31 +107,27 @@ export function useGame(gameCountries: Country[]) {
 
   function advanceToNextQuestion() {
     index.value += 1
-    showOverlay.value = 'none'
     isAdvancing.value = false
     completeRunIfFinished()
   }
 
-  function submitSelectedChoice(choice: GameChoice) {
+  function submitSelectedChoice(choice: GameChoice): boolean | null {
     if (gameState.value !== 'play' || !currentQuestion.value || isAdvancing.value)
-      return
+      return null
 
     isAdvancing.value = true
 
-    if (choice.isCorrect) {
-      showOverlay.value = 'success'
-    }
-    else {
-      showOverlay.value = 'error'
+    if (!choice.isCorrect)
       wrongQuestions.value.push(currentQuestion.value)
-    }
 
     choice.selected = true
+
+    return choice.isCorrect
   }
 
-  function submitTypedAnswer(answer: string) {
+  function submitTypedAnswer(answer: string): boolean | null {
     if (gameState.value !== 'play' || !currentQuestion.value || isAdvancing.value)
-      return
+      return null
 
     isAdvancing.value = true
 
@@ -144,13 +139,10 @@ export function useGame(gameCountries: Country[]) {
     )
     const isCorrect = acceptedAnswers.has(normalizedTypedAnswer)
 
-    if (isCorrect) {
-      showOverlay.value = 'success'
-    }
-    else {
-      showOverlay.value = 'error'
+    if (!isCorrect)
       wrongQuestions.value.push(currentQuestion.value)
-    }
+
+    return isCorrect
   }
 
   function proceedToNextQuestion() {
@@ -166,7 +158,6 @@ export function useGame(gameCountries: Country[]) {
     wrongQuestions.value = []
     elapsedSeconds.value = 0
     isAdvancing.value = false
-    showOverlay.value = 'none'
   }
 
   function startGame() {
@@ -201,7 +192,6 @@ export function useGame(gameCountries: Country[]) {
     wrongQuestions.value = []
     elapsedSeconds.value = 0
     isAdvancing.value = false
-    showOverlay.value = 'none'
     gameState.value = 'play'
   }
 
@@ -227,7 +217,6 @@ export function useGame(gameCountries: Country[]) {
   return {
     gameState,
     isAdvancing,
-    showOverlay,
     questions,
     index,
     wrongQuestions,
