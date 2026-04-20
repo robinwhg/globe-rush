@@ -6,6 +6,7 @@ const { game, config } = defineProps<{
 
 const ANSWER_FEEDBACK_DELAY = 600
 const currentQuestion = computed(() => game.currentQuestion.value!)
+const typedAnswer = ref('')
 const proceedTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
 
 function clearProceedTimeout() {
@@ -26,7 +27,7 @@ function scheduleProceedToNextQuestion() {
 }
 
 function onSubmitTypedAnswer() {
-  game.submitTypedAnswer()
+  game.submitTypedAnswer(typedAnswer.value)
 
   if (game.isAdvancing.value)
     scheduleProceedToNextQuestion()
@@ -41,6 +42,10 @@ function onSelectChoice(choice: GameChoice) {
 
 onScopeDispose(() => {
   clearProceedTimeout()
+})
+
+watch(() => currentQuestion.value.cca3, () => {
+  typedAnswer.value = ''
 })
 </script>
 
@@ -64,7 +69,7 @@ onScopeDispose(() => {
     <template #actions>
       <UInput
         v-if="config.game.mode === 'type-answer'"
-        :model-value="game.typedAnswer.value"
+        v-model="typedAnswer"
         size="xl"
         variant="soft"
         placeholder="Enter your answer here..."
@@ -78,12 +83,11 @@ onScopeDispose(() => {
           : game.showOverlay.value === 'error' ? 'text-error bg-error/25 hover:bg-error/25 focus:bg-error/25 disabled:bg-error/25 px-4 py-4'
             : 'px-4 py-4',
         }"
-        @update:model-value="value => game.setTypedAnswer(String(value ?? ''))"
         @keyup.enter="onSubmitTypedAnswer"
       >
         <template #trailing>
           <UButton
-            :disabled="!game.typedAnswer.value.length"
+            :disabled="!typedAnswer.length"
             color="neutral"
             variant="link"
             icon="i-tabler-arrow-forward"

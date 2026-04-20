@@ -38,7 +38,6 @@ export function useGame(gameCountries: Country[]) {
   const index = ref(0)
   const wrongQuestions = ref<Country[]>([])
   const elapsedSeconds = ref(0)
-  const typedAnswer = ref('')
 
   const isFinished = computed(() => index.value >= questions.value.length)
   const currentQuestion = computed(() => questions.value[index.value])
@@ -111,7 +110,6 @@ export function useGame(gameCountries: Country[]) {
     index.value += 1
     showOverlay.value = 'none'
     isAdvancing.value = false
-    typedAnswer.value = ''
     completeRunIfFinished()
   }
 
@@ -132,13 +130,13 @@ export function useGame(gameCountries: Country[]) {
     choice.selected = true
   }
 
-  function submitTypedAnswer() {
+  function submitTypedAnswer(answer: string) {
     if (gameState.value !== 'play' || !currentQuestion.value || isAdvancing.value)
       return
 
     isAdvancing.value = true
 
-    const normalizedTypedAnswer = normalizeTypedAnswer(typedAnswer.value)
+    const normalizedTypedAnswer = normalizeTypedAnswer(answer)
     const acceptedAnswers = new Set(
       getCountryNameVariants(currentQuestion.value)
         .map(normalizeTypedAnswer)
@@ -162,10 +160,6 @@ export function useGame(gameCountries: Country[]) {
     advanceToNextQuestion()
   }
 
-  function setTypedAnswer(value: string) {
-    typedAnswer.value = value
-  }
-
   function resetRun() {
     questions.value = shuffle(gameCountries)
     index.value = 0
@@ -173,7 +167,6 @@ export function useGame(gameCountries: Country[]) {
     elapsedSeconds.value = 0
     isAdvancing.value = false
     showOverlay.value = 'none'
-    typedAnswer.value = ''
   }
 
   function startGame() {
@@ -210,7 +203,6 @@ export function useGame(gameCountries: Country[]) {
     isAdvancing.value = false
     showOverlay.value = 'none'
     gameState.value = 'play'
-    typedAnswer.value = ''
   }
 
   function stopToStart() {
@@ -255,8 +247,6 @@ export function useGame(gameCountries: Country[]) {
     stopToStart,
     reviewWrongFlags,
     retry,
-    typedAnswer,
-    setTypedAnswer,
   }
 }
 
