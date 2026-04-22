@@ -122,5 +122,14 @@ watch(game.gameState, (state, previousState) => {
         @back="emit('back')"
       />
     </Transition>
+
+    <Transition name="slide-up" mode="out-in" appear>
+      <Scoreboard
+        v-if="game.gameState.value === 'start' || game.gameState.value === 'end'"
+        :region-slug="config.region.slug"
+        :game-slug="config.game.slug"
+        :game-mode="config.game.mode"
+      />
+    </Transition>
   </div>
 </template>
