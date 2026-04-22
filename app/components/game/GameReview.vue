@@ -38,9 +38,13 @@ onKeyStroke('Enter', (event) => {
       <div class="h-48 lg:h-80">
         <div class="grid grid-cols-2 gap-4">
           <div class="inline-flex justify-between items-center w-full col-span-2 mb-4">
-            <UPageFeature :title="country.name.common" :description="country.name.official" class="flex-1" :ui="{ description: 'hidden sm:block' }" />
+            <UPageFeature :title="country.name.common" :description="country.name.official" class="flex-1 min-w-0" :ui="{ description: 'hidden sm:block' }" />
 
-            <GameImage :src="country.flag.svg" :alt="country.flag.alt" class="h-12! w-min" />
+            <img
+              :src="country.flag.svg"
+              :alt="country.flag.alt"
+              class="ml-auto h-12 w-auto shrink-0 object-contain"
+            >
           </div>
 
           <UPageFeature :title="country.region" description="Region" icon="i-tabler-world" />
